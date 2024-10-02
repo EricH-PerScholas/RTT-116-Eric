@@ -11,6 +11,10 @@ public class Lesson303dot2 {
 
         // if we want to express a tab in a string
         System.out.println("This is a tab ->\t<-");
+        System.out.println("This is a tab ->1\t<-");
+        System.out.println("This is a tab ->12\t<-");
+        System.out.println("This is a tab ->123\t<-");
+        System.out.println("This is a tab ->1234\t<-");
     }
 
 }
