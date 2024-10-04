@@ -1,6 +1,7 @@
 package org.perscholas;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.StringJoiner;
 
 public class StringExamples {
@@ -187,11 +188,28 @@ public class StringExamples {
         // it will take 5 minutes to figure out what you need when you need it as long as you can remember
         // that the DecimalFormatter exists.
 
-        String pattern = "$##,###,###.##";
-        double number = 123456789.123;
+        String pattern = "$###,###.00";
+        double number = 123.1;
 
         DecimalFormat numberFormat = new DecimalFormat(pattern);
         System.out.println(numberFormat.format(number));
+
+        // ======= TRIM =========
+
+        String t = "   abc123    ";
+        System.out.println("->" + t + "<-");
+        System.out.println("->" + t.trim() + "<-");
+
+        // ======= Split ======
+
+        String vowels = "a:e:i:o:u";
+
+        // splitting the string at ","
+        String[] result = vowels.split(":");
+
+        // converting array to string and printing it
+        System.out.println("result = " + Arrays.toString(result));
+
 
     }
 }
