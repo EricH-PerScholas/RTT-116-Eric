@@ -32,7 +32,8 @@ public class ForLoopExamples {
             System.out.println("strings at position " + pos + " = " + value);
         }
 
-        // new style for loop for array 
+        // new style for loop for array
+        // most cases you want to start at the begining and goto the end
         for ( String value : strings) {
             System.out.println("new style for loop for an array : " + value);
         }
