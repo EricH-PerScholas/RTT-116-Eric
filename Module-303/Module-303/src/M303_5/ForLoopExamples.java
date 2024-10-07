@@ -3,7 +3,7 @@ package M303_5;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoopsExamples {
+public class ForLoopExamples {
 
     public static void main(String[] args) {
 
