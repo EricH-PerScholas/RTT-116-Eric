@@ -32,6 +32,11 @@ public class LoopsExamples {
             System.out.println("strings at position " + pos + " = " + value);
         }
 
+        // new style for loop for array 
+        for ( String value : strings) {
+            System.out.println("new style for loop for an array : " + value);
+        }
+
         // looping over the characters in a string
         //                   0123456
         String characters = "abcdefg";
@@ -56,6 +61,14 @@ public class LoopsExamples {
             // we are using the .get function to get a element of the list by its position
             String value = stringList.get(pos);
             System.out.println("string at list position " + pos + " = " + value);
+        }
+
+        // new style for loop
+        // read this in my mind .. for value in stringList
+        // this for loop is easier to type and read but does not contain the position in the list that each item came from
+        // which is okay in lots of cases
+        for ( String value : stringList ) {
+            System.out.println("new for loop " + value);
         }
 
     }
