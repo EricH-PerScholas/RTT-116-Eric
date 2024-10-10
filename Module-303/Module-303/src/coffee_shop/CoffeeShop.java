@@ -73,6 +73,29 @@ public class CoffeeShop {
         System.out.println("Added " + p.getName() + " to your cart.\n");
     }
 
+    public void checkout() {
+        System.out.println("==== Items in your cart ====");
+
+        // list the items in the cart
+        double subtotal = 0.0;
+        for ( Product item : cart ) {
+            System.out.println(item.getName() + " \t $" + item.getPrice() );
+            subtotal = subtotal + item.getPrice();
+        }
+        System.out.println("");
+        System.out.println("Subtotal\t\t $" + subtotal);
+
+        // assume there is a 9% sales tax to be applied to the order
+        // calculate tax
+        double tax = subtotal * 0.09;
+        System.out.println("Tax\t\t\t\t $" + tax);
+
+        // calculate total amount
+        // adding an addtional () will cause it to do the math
+        double total = (subtotal + tax);
+        System.out.println("Total\t\t\t $" + total + "\n");
+    }
+
     public void start() {
         // this becomes similar to the main method in that it will be where our project starts and runs
         // 1) initialize the products for sale
@@ -91,6 +114,7 @@ public class CoffeeShop {
                 addProductToCart();
             } else if (selection == 3) {
                 // checkout
+                checkout();
             } else if (selection == 4) {
                 System.out.println("Good bye");
 
