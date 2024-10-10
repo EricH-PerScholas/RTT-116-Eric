@@ -13,6 +13,9 @@ public class CoffeeShop {
     // best practice is to define these at the top of the class
     private List<Product> products = new ArrayList<>();
 
+    // this will hold the products that we are going to purchase
+    private List<Product> cart = new ArrayList<>();
+
     private void initProducts() {
         Product p1 = new Product("Small Coffee", 4.57, 0);
         products.add(p1);
@@ -48,8 +51,26 @@ public class CoffeeShop {
         System.out.print("\nEnter Selection :");
 
         int selection = scanner.nextInt();
+        scanner.nextLine();
 
         return selection;
+    }
+
+    public void addProductToCart() {
+        // 1 display the items for sale
+        printProductMenu();
+
+        // 2 prompt the user to enter an item # to buy
+        System.out.print("Enter product number:");
+        int selection = scanner.nextInt();
+        scanner.nextLine();
+
+        // 3 add to the cart array
+        // we are subtracting 1 from the user input to get the real position in the array
+        // because most people do not have a concept of the 0th item in a list
+        Product p = products.get(selection - 1);
+        cart.add(p);
+        System.out.println("Added " + p.getName() + " to your cart.\n");
     }
 
     public void start() {
@@ -67,6 +88,7 @@ public class CoffeeShop {
                 printProductMenu();
             } else if (selection == 2) {
                 // purchase product / add to cart
+                addProductToCart();
             } else if (selection == 3) {
                 // checkout
             } else if (selection == 4) {
