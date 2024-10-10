@@ -20,6 +20,8 @@ public class CalcRunner {
         t.setName("Triangle");
 
         // make a list of shapes but notice that we are using the parent shape
+        // in an indrect way, when we add individual shapes to this list, they are
+        // automatically being typecasted to a shape
         List<Shape> shapes = new ArrayList<>();
         shapes.add(c);
         shapes.add(c1);
@@ -28,7 +30,15 @@ public class CalcRunner {
         // lets loop over all the shapes and calculate the area
         for ( Shape s : shapes ) {
             double area = s.calculateArea();
-            System.out.println("The area for shape " + s.getName() + " is " + area);
+            double perimeter = s.calculatePerimeter();
+
+            // when something has been typcasted to its parent we can still check to
+            // see if it is a Triangle by using instanceof
+            if ( s instanceof Triangle ) {
+                System.out.println("s is of type Triangle");
+            }
+
+            System.out.println("The area for shape " + s.getName() + " is " + area + " and perimeter is " + perimeter);
         }
 
     }
