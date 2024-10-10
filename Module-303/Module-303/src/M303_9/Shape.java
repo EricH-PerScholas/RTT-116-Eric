@@ -1,6 +1,6 @@
 package M303_9;
 
-public class Shape {
+public abstract class Shape implements AreaCalculation {
 
 
     private String name;

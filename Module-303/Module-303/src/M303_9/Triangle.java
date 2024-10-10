@@ -20,4 +20,9 @@ public class Triangle extends Shape {
     public void setHeight(double height) {
         this.height = height;
     }
+
+    @Override
+    public double calculateArea() {
+        return 0.5 * base * height;
+    }
 }

@@ -11,6 +11,9 @@ public class Runner {
         c.setName("Circle");  // this is implemented in the shape class
         System.out.println(c.getName() + " = " + c.getPI());
 
+        Shape s = (Shape)c;
+        s.setName("Circle Shape");
+
         Circle c1 = new Circle();
         c1.setRadius(15.0);
         c1.setName("Circle 1");

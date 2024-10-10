@@ -29,4 +29,8 @@ public class Circle extends Shape {
     }
 
 
+    @Override
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
 }
