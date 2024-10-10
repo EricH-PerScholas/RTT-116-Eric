@@ -19,6 +19,9 @@ public class CalcRunner {
         t.setBase(10.0);
         t.setName("Triangle");
 
+        // this is no longer possible because shape is abstract and thus incomplete
+        //Shape s = new Shape();
+
         // make a list of shapes but notice that we are using the parent shape
         // in an indrect way, when we add individual shapes to this list, they are
         // automatically being typecasted to a shape
