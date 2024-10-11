@@ -8,5 +8,5 @@ public interface AreaCalculation {
     // this is just for method signatures
     public double calculateArea();
 
-
+    public static final String KEY_CONSTANT = "value";
 }

@@ -44,5 +44,13 @@ public class CalcRunner {
             System.out.println("The area for shape " + s.getName() + " is " + area + " and perimeter is " + perimeter);
         }
 
+        // the child can become the parent
+        //Shape s = new Circle();
+
+        // the parent can not become the child
+        //Circle c3 = new Shape();
+
     }
+
+
 }

@@ -157,11 +157,13 @@ public class StringExamples {
 
         sj1.add("Eric");
         sj1.add("Jessica");
+        sj1.add("Another NAme");
 
         System.out.println(sj1);
 
         sj2.add("Jeff");
         sj2.add("Kiet");
+        sj2.add("One more");
 
         System.out.println(sj2);
 

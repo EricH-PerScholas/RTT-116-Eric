@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class CoffeeShop {
 
+
     // we will use this is a couple functions to read input from the user
     private Scanner scanner = new Scanner(System.in);
 
@@ -139,6 +140,7 @@ public class CoffeeShop {
 
     }
 
+    // a main method can not be private 
     public static void main(String[] args) {
         CoffeeShop cs = new CoffeeShop();
         cs.start();
