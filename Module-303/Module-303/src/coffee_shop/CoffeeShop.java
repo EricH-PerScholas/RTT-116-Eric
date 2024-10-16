@@ -77,6 +77,9 @@ public class CoffeeShop {
             // we are subtracting 1 from the user input to get the real position in the array
             // because most people do not have a concept of the 0th item in a list
             Product p = products.get(selection - 1);
+            //p.setQuantity(p.getQuantity() + quantityEnteredByUser);
+
+            // right here add a for loop to check if the product is already existing in the cart
             cart.add(p);
             System.out.println("Added " + p.getName() + " to your cart.\n");
         } else {
@@ -140,7 +143,7 @@ public class CoffeeShop {
 
     }
 
-    // a main method can not be private 
+    // a main method can not be private
     public static void main(String[] args) {
         CoffeeShop cs = new CoffeeShop();
         cs.start();

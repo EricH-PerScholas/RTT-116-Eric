@@ -30,6 +30,7 @@ public class CalcRunner {
         shapes.add(c1);
         shapes.add(t);
 
+
         // lets loop over all the shapes and calculate the area
         for ( Shape s : shapes ) {
             double area = s.calculateArea();
