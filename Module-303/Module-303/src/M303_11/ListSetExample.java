@@ -6,6 +6,13 @@ public class ListSetExample {
 
     public static void main(String[] args) {
 
+        // all objects in java extend from Object
+        // a list of Object can take all data types
+        List<Object> objects = new ArrayList<>(100);
+        objects.add("String");
+        objects.add(Integer.parseInt("1"));
+        objects.add(20.0);
+
         // this is used 95% of the time - vast majority of what we do as engineers uses a list
         List<Integer> intList = new ArrayList<>();
         intList.add(2);
@@ -29,7 +36,7 @@ public class ListSetExample {
         Iterator<Integer> iterator = intList.iterator();
 
         // loop over the list using an iterator, we check to make sure the iterator (list) has a next element
-        while ( iterator.hasNext()) {
+        while (iterator.hasNext()) {
             // the .next function is actually 2 operations, first is to return the element at the pointer and second to move the pointer over 1 element
             Integer i = iterator.next();
 
