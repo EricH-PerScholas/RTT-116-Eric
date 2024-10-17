@@ -16,6 +16,10 @@ public class ExceptionExample {
 
             String s1 = "abc";
             s1.charAt(10);
+
+            // this line of code will not execute if an exception happens in the code above it
+            // this is very important to know and very powerful feature of mondern programming languages
+            System.out.println("This is the last line of the try catch block and will only execute if no problem");
         } catch ( ArithmeticException ae ) {
             // this is the code for when the divide by 0
             System.out.println("Divide by 0 exception");
