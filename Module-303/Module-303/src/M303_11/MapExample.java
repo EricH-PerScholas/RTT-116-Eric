@@ -28,6 +28,9 @@ public class MapExample {
         // in a way this is setting the value to empty. however it is not deleting the key from the keySet
         numbers.put("one", null);
 
+        // to remove a key and value from the hashmap we can use the remove function
+        numbers.remove("tenn");
+
         // we are askign the map for a key that does not exist it will retun null meaning not existing
         // the get method returns null when not found
         Integer notFound = numbers.get("thousand");

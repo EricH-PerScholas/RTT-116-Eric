@@ -73,19 +73,48 @@ public class CoffeeShop {
 
         // we want to check that the user has entered a valid product number
         if ( selection >= 1 && selection <= products.size() ) {
-            // 3 add to the cart array
-            // we are subtracting 1 from the user input to get the real position in the array
-            // because most people do not have a concept of the 0th item in a list
-            Product p = products.get(selection - 1);
-            //p.setQuantity(p.getQuantity() + quantityEnteredByUser);
 
-            // right here add a for loop to check if the product is already existing in the cart
-            cart.add(p);
-            System.out.println("Added " + p.getName() + " to your cart.\n");
+            // if the user does not enter a valid item from the menu then there is no reason to ask how many
+            // prompt the user to enter how many they would like to buy
+            System.out.print("Enter quantity to buy:");
+            int quantity = scanner.nextInt();
+            scanner.nextLine();
+
+            // error checking can happen here to make sure the user enters a positive number
+            if ( quantity <= 0 ) {
+                System.out.println("Must buy at least one item");
+
+            } else {
+                // 3 add to the cart array
+                // we are subtracting 1 from the user input to get the real position in the array
+                // because most people do not have a concept of the 0th item in a list
+                Product p = products.get(selection - 1);
+                p.setQuantity(p.getQuantity() + quantity);
+
+                // if the product does not already exist in the cart then we can add the product to the cart
+                if (!existsInCart(p)) {
+                    cart.add(p);
+                }
+                System.out.println("Added " + p.getName() + " to your cart.\n");
+            }
         } else {
             System.out.println("Invalid item selection");
         }
+    }
 
+    private boolean existsInCart(Product purchase) {
+        boolean found = false;
+
+        // start looping over all the items in the cart and if the name of the purchased item is the same
+        // name as one of the products in the cart then we know it is already in the cart
+        for ( Product item : cart ) {
+            if ( item.getName().equals(purchase.getName())) {
+                found = true;
+                break;
+            }
+        }
+
+        return found;
     }
 
     public void checkout() {
@@ -94,7 +123,7 @@ public class CoffeeShop {
         // list the items in the cart
         double subtotal = 0.0;
         for ( Product item : cart ) {
-            System.out.println(item.getName() + " \t $" + item.getPrice() );
+            System.out.println(item.getName() + " \t " + item.getQuantity() + " \t $" + item.getPrice() + " \t Total $" + (item.getPrice() * item.getQuantity()) );
             subtotal = subtotal + item.getPrice();
         }
         System.out.println("");
