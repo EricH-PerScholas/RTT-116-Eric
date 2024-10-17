@@ -72,7 +72,7 @@ public class CoffeeShop {
         scanner.nextLine();
 
         // we want to check that the user has entered a valid product number
-        if ( selection >= 1 && selection <= products.size() ) {
+        if ( isProductSelectionValid(selection) ) {
 
             // if the user does not enter a valid item from the menu then there is no reason to ask how many
             // prompt the user to enter how many they would like to buy
@@ -92,7 +92,7 @@ public class CoffeeShop {
                 p.setQuantity(p.getQuantity() + quantity);
 
                 // if the product does not already exist in the cart then we can add the product to the cart
-                if (!existsInCart(p)) {
+                if (!doesSelectedProductExistInCart(p)) {
                     cart.add(p);
                 }
                 System.out.println("Added " + p.getName() + " to your cart.\n");
@@ -102,7 +102,15 @@ public class CoffeeShop {
         }
     }
 
-    private boolean existsInCart(Product purchase) {
+    private boolean isProductSelectionValid(int selectedProduct) {
+        if ( selectedProduct >= 1 && selectedProduct <= products.size() ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean doesSelectedProductExistInCart(Product purchase) {
         boolean found = false;
 
         // start looping over all the items in the cart and if the name of the purchased item is the same
