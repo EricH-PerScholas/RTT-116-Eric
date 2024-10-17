@@ -194,7 +194,7 @@ public class CoffeeShop {
     }
 
     // a main method can not be private
-    public static void main(String[] args) throws InvalidInputException {
+    public static void main(String[] args) throws Exception {
         CoffeeShop cs = new CoffeeShop();
         cs.start();
     }
