@@ -10,12 +10,20 @@ public class ExceptionExample {
         // this will try to access the array at position 10 which does not exist
         // this will throw an exception
         try {
+            // ArithmaticException
             //int x = 10 / 0;
 
+            // ArrayIndexOutofBoundsException
             //System.out.println(numbers[10]);
 
+            // StringIndexOutofBoundsException
             String s1 = "abc";
-            s1.charAt(10);
+            //s1.charAt(10);
+
+            // NullPointerException
+            // this is the most common form of programmer error
+            String s2 = null;
+            s2.toUpperCase();
 
             // this line of code will not execute if an exception happens in the code above it
             // this is very important to know and very powerful feature of mondern programming languages
@@ -23,14 +31,20 @@ public class ExceptionExample {
         } catch ( ArithmeticException ae ) {
             // this is the code for when the divide by 0
             System.out.println("Divide by 0 exception");
-        } catch ( ArrayIndexOutOfBoundsException e ) {
+            try {
+                // some code
+            } catch ( Exception e1 ) {
+                // I dont care what happens
+            }
+        } catch ( ArrayIndexOutOfBoundsException aiobe ) {
             // specifically catching only ArrayIndexOutOfBoundsException
-            e.printStackTrace();
-            System.out.println("=====> " + e.getMessage());
+            aiobe.printStackTrace();
+            System.out.println("=====> " + aiobe.getMessage());
         } catch ( Exception e ) {
             // most of the time I just catch Exception because I dont care what happened I just care that it failed
             // all exceptions extend from Exception
-            System.out.println("This is something unexpected");
+            System.out.println("This is something unexpected" + e.getMessage());
+            e.printStackTrace();
         } finally {
             // finally block is optional
             // this code will execute no matter what

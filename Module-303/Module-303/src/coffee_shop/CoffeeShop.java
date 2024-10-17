@@ -1,5 +1,6 @@
 package coffee_shop;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -32,32 +33,43 @@ public class CoffeeShop {
     }
 
     private void printProductMenu() {
-        for ( int count = 0 ; count < products.size() ; count++ ) {
+        for (int count = 0; count < products.size(); count++) {
             Product p = products.get(count);
             // count + 1 the complier will recognize the math and increment the value of count
             // before using it to create the string that is printed
-            System.out.println((count+1) + ") " + p.getName() + " \t " + p.getPrice());
+            System.out.println((count + 1) + ") " + p.getName() + " \t " + p.getPrice());
         }
 
         // give some white space after print
         System.out.println("");
     }
 
-    private int printMainMenu() {
+    private int printMainMenu() throws InvalidInputException {
         System.out.println("1) See product menu");
         System.out.println("2) Purchase product");
         System.out.println("3) Checkout");
         System.out.println("4) Exit");
 
-        System.out.print("\nEnter Selection :");
+        return readNumberFromUser("\nEnter Selection :");
+    }
 
+    // by adding the throws clause here, I am specifically saying this fuction can (but may not) throw an exception called InvalidInputException
+    // this is what is called throwing a checked exception which means that all places in the code that are calling this method now have to deal with it
+    private int readNumberFromUser(String question) throws InvalidInputException {
+        System.out.print(question);
         try {
             int selection = scanner.nextInt();
+            // normally a return stops execution of code at that point and executes the function
+            // ****** !!!!!!  in this case it will still call the finally block
             return selection;
-        } catch ( Exception e ) {
-            System.out.println("Invalid selection " + e.getMessage());
-            return -1;
+        } catch (Exception e) {
+            // this is logic we are adding as an engineer so we know there was a problem
+            // this is not always the best of handeling things
+            System.out.println("Invalid input: " + e.getMessage());
+            throw new InvalidInputException("Invalid input: " + e.getMessage());
         } finally {
+            // this is a good example of usage for a finally block is to clear the Scanner so it is ready for the
+            // next time this function is called.
             scanner.nextLine();
         }
     }
@@ -67,43 +79,44 @@ public class CoffeeShop {
         printProductMenu();
 
         // 2 prompt the user to enter an item # to buy
-        System.out.print("Enter product number:");
-        int selection = scanner.nextInt();
-        scanner.nextLine();
+        try {
+            int selection = readNumberFromUser("Enter product number:");
 
-        // we want to check that the user has entered a valid product number
-        if ( isProductSelectionValid(selection) ) {
+            // we want to check that the user has entered a valid product number
+            if (isProductSelectionValid(selection)) {
 
-            // if the user does not enter a valid item from the menu then there is no reason to ask how many
-            // prompt the user to enter how many they would like to buy
-            System.out.print("Enter quantity to buy:");
-            int quantity = scanner.nextInt();
-            scanner.nextLine();
+                // if the user does not enter a valid item from the menu then there is no reason to ask how many
+                // prompt the user to enter how many they would like to buy
+                int quantity = readNumberFromUser("Enter quantity to buy:");
 
-            // error checking can happen here to make sure the user enters a positive number
-            if ( quantity <= 0 ) {
-                System.out.println("Must buy at least one item");
+                // error checking can happen here to make sure the user enters a positive number
+                if (quantity <= 0) {
+                    System.out.println("Must buy at least one item");
 
-            } else {
-                // 3 add to the cart array
-                // we are subtracting 1 from the user input to get the real position in the array
-                // because most people do not have a concept of the 0th item in a list
-                Product p = products.get(selection - 1);
-                p.setQuantity(p.getQuantity() + quantity);
+                } else {
+                    // 3 add to the cart array
+                    // we are subtracting 1 from the user input to get the real position in the array
+                    // because most people do not have a concept of the 0th item in a list
+                    Product p = products.get(selection - 1);
+                    p.setQuantity(p.getQuantity() + quantity);
 
-                // if the product does not already exist in the cart then we can add the product to the cart
-                if (!doesSelectedProductExistInCart(p)) {
-                    cart.add(p);
+                    // if the product does not already exist in the cart then we can add the product to the cart
+                    if (!doesSelectedProductExistInCart(p)) {
+                        cart.add(p);
+                    }
+                    System.out.println("Added " + p.getName() + " to your cart.\n");
                 }
-                System.out.println("Added " + p.getName() + " to your cart.\n");
+            } else {
+                System.out.println("Invalid item selection");
             }
-        } else {
-            System.out.println("Invalid item selection");
+        } catch (InvalidInputException iie) {
+            // maybe we dont care to do anything here ...
+            System.out.println("===== HERE =====");
         }
     }
 
     private boolean isProductSelectionValid(int selectedProduct) {
-        if ( selectedProduct >= 1 && selectedProduct <= products.size() ) {
+        if (selectedProduct >= 1 && selectedProduct <= products.size()) {
             return true;
         }
 
@@ -115,8 +128,8 @@ public class CoffeeShop {
 
         // start looping over all the items in the cart and if the name of the purchased item is the same
         // name as one of the products in the cart then we know it is already in the cart
-        for ( Product item : cart ) {
-            if ( item.getName().equals(purchase.getName())) {
+        for (Product item : cart) {
+            if (item.getName().equals(purchase.getName())) {
                 found = true;
                 break;
             }
@@ -130,8 +143,8 @@ public class CoffeeShop {
 
         // list the items in the cart
         double subtotal = 0.0;
-        for ( Product item : cart ) {
-            System.out.println(item.getName() + " \t " + item.getQuantity() + " \t $" + item.getPrice() + " \t Total $" + (item.getPrice() * item.getQuantity()) );
+        for (Product item : cart) {
+            System.out.println(item.getName() + " \t " + item.getQuantity() + " \t $" + item.getPrice() + " \t Total $" + (item.getPrice() * item.getQuantity()));
             subtotal = subtotal + item.getPrice();
         }
         System.out.println("");
@@ -148,13 +161,13 @@ public class CoffeeShop {
         System.out.println("Total\t\t\t $" + total + "\n");
     }
 
-    public void start() {
+    public void start() throws InvalidInputException {
         // this becomes similar to the main method in that it will be where our project starts and runs
         // 1) initialize the products for sale
         initProducts();
 
         // repeat forever until the user enters selection 4 which will exit the program
-        while( true ) {
+        while (true) {
             // print the menu and get back the user selected input
             int selection = printMainMenu();
 
@@ -181,7 +194,7 @@ public class CoffeeShop {
     }
 
     // a main method can not be private
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidInputException {
         CoffeeShop cs = new CoffeeShop();
         cs.start();
     }
