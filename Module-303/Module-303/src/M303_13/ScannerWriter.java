@@ -2,6 +2,7 @@ package M303_13;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -15,7 +16,7 @@ public class ScannerWriter {
 
         try {
             File file = new File("src/temp2.txt");
-            PrintWriter pw = new PrintWriter(file);
+            PrintWriter pw = new PrintWriter(new FileWriter(file,true));
 
             System.out.print("Enter a string to write to the file: ");
 
