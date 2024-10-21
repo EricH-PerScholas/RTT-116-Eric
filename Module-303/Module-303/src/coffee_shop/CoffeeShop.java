@@ -39,8 +39,18 @@ public class CoffeeShop {
         // lets sort the list by the price
         // https://stackoverflow.com/questions/40517977/sorting-a-list-with-stream-sorted-in-java
         // stream will not modify the original list that you streamed
-        // TODO - Homework - write this function using a for loop
+        // TODO - Homework #1 - write this function using a for loop
+        // use a bubble sort algorithm - look this up on google
+        // sort the list of products by price using 2 nested for loops to implement a bubble sort in a function
+        // should create a function that will tke in a List<Product> to be sorted and return a sorted List<Product>
+
         // TODO - Homework #2 - create a new main menu option that allows you to search the list of products for a user entered name
+        // 1) Ask the user to enter a search phrase "coffee"
+        // 2) filter the list of products to show only the products that the match the phrase entered
+        // 2b - do not alter the original list of products which means use the .stream()
+        // 2c - use a lambda to print out the sorted list using a product.toString() method
+        // 2c p1 - create a toString method on your product object
+        // 3) Add the search capability to the main menu when you start the coffee shop as a new option
         List<Product> sorted = products.stream().sorted(Comparator.comparing(Product::getPrice)).toList();
 
         // this just prints the products and when we run this we will have to make a fix
@@ -50,6 +60,10 @@ public class CoffeeShop {
         products.sort(Comparator.comparing(Product::getPrice).thenComparing(Product::getName));
         // this line uses a lambda expression
         products.forEach(p -> System.out.println(p));
+    }
+
+    private List<Product> sortByPrice(List<Product> source) {
+        return null;
     }
 
     private void printProductMenu() {
