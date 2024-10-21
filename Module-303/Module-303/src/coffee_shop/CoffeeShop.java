@@ -1,10 +1,8 @@
 package coffee_shop;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class CoffeeShop {
 
@@ -32,37 +30,51 @@ public class CoffeeShop {
         Product p5 = new Product("Ginger Cookie", 5.89, 0);
         products.add(p5);
 
-        Product p4 = new Product("Egg Sandwich", 6.49, 0);
+        Product p4 = new Product("Egg Sandwich", 2.49, 0);
         products.add(p4);
 
 
         // lets sort the list by the price
         // https://stackoverflow.com/questions/40517977/sorting-a-list-with-stream-sorted-in-java
         // stream will not modify the original list that you streamed
-        // TODO - Homework #1 - write this function using a for loop
-        // use a bubble sort algorithm - look this up on google
-        // sort the list of products by price using 2 nested for loops to implement a bubble sort in a function
-        // should create a function that will tke in a List<Product> to be sorted and return a sorted List<Product>
 
-        // TODO - Homework #2 - create a new main menu option that allows you to search the list of products for a user entered name
-        // 1) Ask the user to enter a search phrase "coffee"
-        // 2) filter the list of products to show only the products that the match the phrase entered
-        // 2b - do not alter the original list of products which means use the .stream()
-        // 2c - use a lambda to print out the sorted list using a product.toString() method
-        // 2c p1 - create a toString method on your product object
-        // 3) Add the search capability to the main menu when you start the coffee shop as a new option
+
         List<Product> sorted = products.stream().sorted(Comparator.comparing(Product::getPrice)).toList();
 
         // this just prints the products and when we run this we will have to make a fix
         //sorted.forEach(p -> System.out.println(p));
 
         // this will modify the origial list ... using stream will not modify the original list
-        products.sort(Comparator.comparing(Product::getPrice).thenComparing(Product::getName));
+        //products.sort(Comparator.comparing(Product::getPrice).thenComparing(Product::getName));
         // this line uses a lambda expression
-        products.forEach(p -> System.out.println(p));
+        //products.forEach(p -> System.out.println(p));
+
+        sortByPrice(products);
     }
 
+    // TODO - Homework #1 - write this function using a for loop
+    // use a bubble sort algorithm - look this up on google
+    // sort the list of products by price using 2 nested for loops to implement a bubble sort in a function
+    // should create a function that will tke in a List<Product> to be sorted and return a sorted List<Product>
+    // commenting on the top of a function is generally bad practice .. im just doign this for the assginment
     private List<Product> sortByPrice(List<Product> source) {
+        // convert the list to an array
+
+        for ( int outer = 0 ; outer < source.size() - 1 ; outer++) {
+            for ( int inner = outer + 1 ; inner < source.size() ; inner++ ) {
+                Product p0 = source.get(outer);
+                Product p1 = source.get(inner);
+
+                if ( p0.getPrice() > p1.getPrice()) {
+                    //Product temp = source.get(outer);
+                    source.set(inner, p0);
+                    source.set(outer, p1);
+                }
+            }
+        }
+
+        products.forEach(p -> System.out.println(p));
+
         return null;
     }
 
@@ -83,6 +95,7 @@ public class CoffeeShop {
         System.out.println("2) Purchase product");
         System.out.println("3) Checkout");
         System.out.println("4) Exit");
+        System.out.println("5) Product Search");
 
         return readNumberFromUser("\nEnter Selection :");
     }
@@ -195,6 +208,29 @@ public class CoffeeShop {
         System.out.println("Total\t\t\t $" + total + "\n");
     }
 
+
+    // TODO - Homework #2 - create a new main menu option that allows you to search the list of products for a user entered name
+    // - 1) Ask the user to enter a search phrase "coffee"
+    // - 2) filter the list of products to show only the products that the match the phrase entered
+    // - 2b - do not alter the original list of products which means use the .stream()
+    // - 2c - use a lambda to print out the sorted list using a product.toString() method
+    // - 2c p1 - create a toString method on your product object
+    // - 3) Add the search capability to the main menu when you start the coffee shop as a new option
+    public void productSearch() {
+        System.out.print("Enter a product name to search for: ");
+        String search = scanner.nextLine();
+
+        // this line of code filters the list of products based if the search input is in the string
+        List<Product> results = products.stream().filter(p -> p.getName().contains(search)).toList();
+
+        // to make it case insensitive then use toLowerCase or toUpperCase
+        // this is a common technique when you want to compare case insenstive
+        // List<Product> results = products.stream().filter(p -> p.getName().toLowerCase().contains(search.toLowerCase())).toList();
+
+        // print the result list using a lamda
+        results.forEach(p -> System.out.println(p));
+    }
+
     public void start() throws InvalidInputException {
         // this becomes similar to the main method in that it will be where our project starts and runs
         // 1) initialize the products for sale
@@ -221,6 +257,8 @@ public class CoffeeShop {
                 // we are exiting with a value of 0 means successful exit
                 // this ends the program
                 System.exit(0);
+            } else if ( selection == 5 ) {
+                productSearch();
             } else {
                 System.out.println("Invalid command entered " + selection + "\n");
             }
