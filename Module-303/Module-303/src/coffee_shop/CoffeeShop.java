@@ -45,7 +45,7 @@ public class CoffeeShop {
         //sorted.forEach(p -> System.out.println(p));
 
         // this will modify the origial list ... using stream will not modify the original list
-        //products.sort(Comparator.comparing(Product::getPrice).thenComparing(Product::getName));
+        products.sort(Comparator.comparing(Product::getPrice).thenComparing(Product::getName));
         // this line uses a lambda expression
         //products.forEach(p -> System.out.println(p));
 
@@ -228,7 +228,11 @@ public class CoffeeShop {
         // List<Product> results = products.stream().filter(p -> p.getName().toLowerCase().contains(search.toLowerCase())).toList();
 
         // print the result list using a lamda
-        results.forEach(p -> System.out.println(p));
+        if ( results.isEmpty() ) {
+            System.out.println("No results were found for input " + search + ".\n");
+        } else {
+            results.forEach(p -> System.out.println(p));
+        }
     }
 
     public void start() throws InvalidInputException {
