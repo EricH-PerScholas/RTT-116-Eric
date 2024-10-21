@@ -2,6 +2,7 @@ package coffee_shop;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -28,8 +29,27 @@ public class CoffeeShop {
         Product p3 = new Product("Sugar Cookie", 5.89, 0);
         products.add(p3);
 
+        Product p5 = new Product("Ginger Cookie", 5.89, 0);
+        products.add(p5);
+
         Product p4 = new Product("Egg Sandwich", 6.49, 0);
         products.add(p4);
+
+
+        // lets sort the list by the price
+        // https://stackoverflow.com/questions/40517977/sorting-a-list-with-stream-sorted-in-java
+        // stream will not modify the original list that you streamed
+        // TODO - Homework - write this function using a for loop
+        // TODO - Homework #2 - create a new main menu option that allows you to search the list of products for a user entered name
+        List<Product> sorted = products.stream().sorted(Comparator.comparing(Product::getPrice)).toList();
+
+        // this just prints the products and when we run this we will have to make a fix
+        //sorted.forEach(p -> System.out.println(p));
+
+        // this will modify the origial list ... using stream will not modify the original list
+        products.sort(Comparator.comparing(Product::getPrice).thenComparing(Product::getName));
+        // this line uses a lambda expression
+        products.forEach(p -> System.out.println(p));
     }
 
     private void printProductMenu() {
@@ -169,6 +189,7 @@ public class CoffeeShop {
         // repeat forever until the user enters selection 4 which will exit the program
         while (true) {
             // print the menu and get back the user selected input
+            // add a try catch block here and reshow the menu asking for another input
             int selection = printMainMenu();
 
             if (selection == 1) {
@@ -194,8 +215,13 @@ public class CoffeeShop {
     }
 
     // a main method can not be private
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         CoffeeShop cs = new CoffeeShop();
-        cs.start();
+        try {
+            cs.start();
+        } catch (InvalidInputException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Ending program");
     }
 }

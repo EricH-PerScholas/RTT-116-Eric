@@ -19,6 +19,21 @@ public class CalcRunner {
         t.setBase(10.0);
         t.setName("Triangle");
 
+        Shape sq = new Shape(){
+            @Override
+            public double calculateArea() {
+                return 0;
+            }
+
+            @Override
+            public double calculatePerimeter() {
+                return 0;
+            }
+        };
+        sq.setName("Square");
+
+
+
         // this is no longer possible because shape is abstract and thus incomplete
         //Shape s = new Shape();
 
