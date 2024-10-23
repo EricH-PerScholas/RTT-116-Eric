@@ -1,5 +1,8 @@
 package M303_12;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class CheckedExceptionExample {
 
     // this one chooses to deal with the exception in the start method after being thrown again by method1
@@ -13,7 +16,7 @@ public class CheckedExceptionExample {
         }
     }
 
-    public void method1() throws CustomException  {
+    public void method1() throws CustomException, IOException, FileNotFoundException {
         System.out.println("method1");
 
         // whats shown here is #2

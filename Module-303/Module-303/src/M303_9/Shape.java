@@ -22,4 +22,9 @@ public abstract class Shape implements AreaCalculation {
     public void setName(String name) {
         this.name = name;
     }
+
+
+    String x = "";  // empty string is a valid string
+    String x1 = null; // nothing in memory and empty pointer
+
 }

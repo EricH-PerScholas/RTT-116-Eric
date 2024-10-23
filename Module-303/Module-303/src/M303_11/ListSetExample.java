@@ -14,7 +14,7 @@ public class ListSetExample {
         objects.add(20.0);
 
         // this is used 95% of the time - vast majority of what we do as engineers uses a list
-        List<Integer> intList = new ArrayList<>();
+        List<Integer> intList = new LinkedList<>();
         intList.add(2);
         intList.add(3);
         intList.add(3);
