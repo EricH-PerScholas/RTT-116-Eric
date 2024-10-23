@@ -78,9 +78,9 @@ public class CoffeeShop {
         return null;
     }
 
-    private void printProductMenu() {
-        for (int count = 0; count < products.size(); count++) {
-            Product p = products.get(count);
+    private void printProductMenu(List<Product> menuProducts) {
+        for (int count = 0; count < menuProducts.size(); count++) {
+            Product p = menuProducts.get(count);
             // count + 1 the complier will recognize the math and increment the value of count
             // before using it to create the string that is printed
             System.out.println((count + 1) + ") " + p.getName() + " \t " + p.getPrice());
@@ -130,7 +130,7 @@ public class CoffeeShop {
 
     public void addProductToCart() {
         // 1 display the items for sale
-        printProductMenu();
+        printProductMenu(products);
 
         // 2 prompt the user to enter an item # to buy
         try {
@@ -244,6 +244,29 @@ public class CoffeeShop {
 
     public void deleteProduct() {
         System.out.println("=============== DELETE PRODUCT ===============");
+
+        printProductMenu(cart);
+
+        try {
+            int selection = readNumberFromUser("Enter product number to remove:");
+
+            // do some error checking here on both of these
+            int quantity = readNumberFromUser("Enter quantity to remove:");
+
+            // lets assume the user only enters valid data
+            Product remove = cart.get(selection-1);
+
+            if ( remove.getQuantity() < quantity ) {
+                // this is the case where there are 5 in the cart and we want to remove 3
+                remove.setQuantity(remove.getQuantity() - quantity);
+            } else {
+                // this remove the item from the cart
+                cart.remove(selection - 1);
+            }
+
+        } catch ( Exception e) {
+            System.out.println("Invalid product selection");
+        }
     }
 
     public void start() throws InvalidInputException {
@@ -260,7 +283,7 @@ public class CoffeeShop {
 
                 if (selection == 1) {
                     // print the product menu
-                    printProductMenu();
+                    printProductMenu(products);
                 } else if (selection == 2) {
                     // purchase product / add to cart
                     addProductToCart();
