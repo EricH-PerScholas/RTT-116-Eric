@@ -6,6 +6,10 @@ public class Product {
     private double price;
     private int quantity;
 
+    public Product() {
+        // no arguments constructor
+    }
+
     public Product(String name, double price, int quantity) {
         this.name = name;
         this.price = price;

@@ -33,6 +33,12 @@ public class CoffeeShop {
         Product p4 = new Product("Egg Sandwich", 2.49, 0);
         products.add(p4);
 
+        // load the products from the file
+        List<Product> loaded = new ProductLoader().loadProducts();
+
+        // add all the products we load to our product list
+        products.addAll(loaded);
+
 
         // lets sort the list by the price
         // https://stackoverflow.com/questions/40517977/sorting-a-list-with-stream-sorted-in-java

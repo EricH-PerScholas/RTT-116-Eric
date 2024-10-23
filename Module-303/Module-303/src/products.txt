@@ -1,0 +1,3 @@
+Hot Chocolate,4.99
+Chai Latte  ,7.78
+Pumpkin Spice Latte,8.99
