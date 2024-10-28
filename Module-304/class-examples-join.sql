@@ -70,3 +70,36 @@ where e.office_id = o.id
     and ord.customer_id = c.id
     and od.order_id = ord.id
 order by e.id, customer_name, order_id;
+
+-- ### Everyting from the previous report ... now I want to add the product name
+-- 3 STEPs to joining
+-- 1 ) Add the table to the from clause
+-- 2 ) Join the tables in the where clause
+-- 3 ) Add any columns desired to the select part of the query
+selecT * from products;
+select e.firstname, e.lastname, o.city, c.customer_name, c.contact_firstname, c.contact_lastname, ord.id as order_id, ord.order_date, od.product_id, od.quantity_ordered, p.product_name
+from offices o, employees e, customers c, orders ord, orderdetails od, products p
+where e.office_id = o.id
+    and c.sales_rep_employee_id = e.id
+    and ord.customer_id = c.id
+    and od.order_id = ord.id
+    and od.product_id = p.id
+order by e.id, customer_name, order_id, product_name;
+
+-- I want to see all the products taht have been ordered and how many times each product has been ordered (note this is different than the quantity ordered)
+-- in the report I want to see the order number, and the times it was purchased
+--  and I want to see the product that was ordered the most on top
+-- hint 1 - the orderdetail table will contain 1 record for each tiem the product was ordered
+-- hint 2 - needs a group by
+select od.order_id as order_number, count(*), sum(quantity_ordered)
+from orderdetails od
+group by od.order_id
+order by od.order_id;
+
+selecT * from orderdetails where order_id = 10100 order by id;
+
+-- 
+
+
+
+
