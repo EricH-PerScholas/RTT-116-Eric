@@ -75,6 +75,10 @@ order by count(*) desc;
 
 select order_date, year(order_date), month(order_date) from orders;
 
+select lcase(city) from offices;
+
+select concat(firstname, lastname) from employees;
+
 -- ------------------------------
 select  o.city,count(*), count(distinct e.id), count(distinct c.id)
 from orders od, customers c, employees e, offices o 
@@ -84,5 +88,18 @@ and e.office_id = o.id
 and year(od.order_date) = 2003
 group by o.id
 order by count(*)desc;
+
+
+SELECT customer_number, customer_name, credit_limit
+FROM customers
+ORDER BY credit_limit DESC
+LIMIT 5,2;
+
+-- ===================
+
+  SELECT SUM(quantity_ordered * price_each) as orderTotal 
+  FROM orderdetails 
+  WHERE order_id = 10100; 
+
 
 
