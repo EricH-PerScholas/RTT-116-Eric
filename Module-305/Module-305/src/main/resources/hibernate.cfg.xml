@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 5.3//EN"
+        "http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- setting this to validate will cause hibernate to compare the entity to the database -->
+        <property name="hbm2ddl.auto">validate</property>
+
+        <!-- this is telling hibernate what database is being used in the back end .. in our case mysql -->
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+
+        <!-- this is the same connection url that we used in the JDBCDemo -->
+        <property name="connection.url">jdbc:mysql://localhost:3306/classic_models</property>
+        <property name="connection.username">dev</property>
+        <property name="connection.password">ultra30dev</property>
+
+        <!-- this is for debugging your code -->
+        <property name="hibernate.show_sql" >true</property>
+        <property name="hibernate.format_sql" >true </property>
+
+        <!-- connection pool reduces the load on the server -->
+        <property name="connection.pool_size">3</property>
+
+        <!-- here we have to list all of our entity objects -->
+        <mapping class="org.example.database.entity.Customer"/>
+        <mapping class="org.example.database.entity.Employee"/>
+        <mapping class="org.example.database.entity.Office"/>
+        <mapping class="org.example.database.entity.Order"/>
+        <mapping class="org.example.database.entity.OrderDetail"/>
+        <mapping class="org.example.database.entity.Product"/>
+    </session-factory>
+</hibernate-configuration>
