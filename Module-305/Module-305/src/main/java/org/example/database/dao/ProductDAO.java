@@ -7,12 +7,63 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDAO {
 
+    // TODO !!!!!!!!!!!!!! DAO is not to contain any business logic.  It is for the mechanics of building a query and returning results
+
     // at the class member level make your session factory ... for all DAO
     private SessionFactory factory = new Configuration().configure().buildSessionFactory();
+
+    public void update(Product product) {
+        // for hibernate to do an update, it needs the product to already exist in the database otherwise its an error
+        Session session = factory.openSession();
+
+        // starting a database transaction
+        session.getTransaction().begin();
+
+        // in an older style of hibernate we need to use the merge function when we want to do an update
+        try {
+            session.merge(product);
+            session.getTransaction().commit();
+        } catch ( Exception e ) {
+            session.getTransaction().rollback();
+        }
+
+        session.close();
+    }
+
+    public void create(Product product) {
+         Session session = factory.openSession();
+
+        // starting a database transaction
+        session.getTransaction().begin();
+
+        // in an older style of hibernate we need to use the persist function when we want to create a new record
+        session.persist(product);
+
+        session.getTransaction().commit();
+
+        session.close();
+    }
+
+    public void delete(Product product) {
+        Session session = factory.openSession();
+
+        // starting a database transaction
+        session.getTransaction().begin();
+
+        // in an older style of hibernate we need to use the persist function when we want to create a new record
+        session.delete(product);
+
+        session.getTransaction().commit();
+
+        session.close();
+    }
+
+    // -------------------- blow here is our queries --------------------------
 
     // ** This query gets created in every single DAO you make **
     public Product findById(Integer id) {
@@ -51,4 +102,36 @@ public class ProductDAO {
         }
     }
 
+    /**
+     * Return a list of products that match the name
+     *
+     * A function that retuns a list will always return a list even if the query returns 0 results
+     */
+    public List<Product> search(String name) {
+        // WARNING !!!! HQL when doing a like statement needs special care in using some other method of concatinating the wild cards
+        // into the query
+        String hqlQuery = "SELECT p FROM Product p WHERE p.productName LIKE concat('%',:name,'%') order by p.buyPrice";
+
+        Session session = factory.openSession();
+
+        TypedQuery<Product> query = session.createQuery(hqlQuery, Product.class);
+        query.setParameter("name", name);
+
+        // will always return a list
+        try {
+            List<Product> result = query.getResultList();
+            return result;
+        } catch ( Exception e ) {
+            // if an error happens
+            // we should do some real error checking here
+            return new ArrayList<>();
+        } finally {
+            session.close();
+        }
+    }
+
+    public List<Product> findByOrderId(int orderId) {
+        // I want to see all products that are in an order
+        return null;
+    }
 }
