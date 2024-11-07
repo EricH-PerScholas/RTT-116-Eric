@@ -11,6 +11,7 @@ public class UpdatePriceDemo {
         Product p = productDAO.findById(1);
 
         p.setProductCode("AAAAAAAAA");
+        p.setProductDescription("Some new description.");
 
         productDAO.update(p);
         // we assume that the update has happened at this point

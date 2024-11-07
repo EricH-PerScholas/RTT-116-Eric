@@ -18,7 +18,7 @@
         <property name="connection.password">ultra30dev</property>
 
         <!-- this is for debugging your code -->
-        <property name="hibernate.show_sql" >true</property>
+        <property name="hibernate.show_sql" >false</property>
         <property name="hibernate.format_sql" >true </property>
 
         <!-- connection pool reduces the load on the server -->
