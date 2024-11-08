@@ -13,6 +13,7 @@ public class Employee {
 
     // To add a one to many relationship steps
     // 1) Goto the example website and create the @OneToMany and @ManyToOne annoations
+    // https://attacomsian.com/blog/spring-data-jpa-one-to-many-mapping
     // 2) In the entity with the foreign key mark that colum as insertable = false and updateable = false
     // 3) Add the @ToString.Exclude annotation to both sides
 

@@ -42,6 +42,7 @@ public class OneToManyExample {
         newCustomer.setCreditLimit(234.33);
         // one of the gotchas is that you have to set the employee on the new customer even tho you are adding the customer the list of customers in the next line of code
         newCustomer.setEmployee(e);
+        //newCustomer.setSalesRepEmployeeId(1034); // this line of code will not work because we told the field to be read only in the configuration
 
         // this is the best way to do this but wanted to show other hibernate features
         //customerDAO.createCustomer(newCustomer);
