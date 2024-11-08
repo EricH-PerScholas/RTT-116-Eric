@@ -1,10 +1,21 @@
 package org.example.database.entity;
 
 import jakarta.persistence.*;
+import lombok.ToString;
+import org.hibernate.query.Page;
+
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "employees")
 public class Employee {
+
+    // To add a one to many relationship steps
+    // 1) Goto the example website and create the @OneToMany and @ManyToOne annoations
+    // 2) In the entity with the foreign key mark that colum as insertable = false and updateable = false
+    // 3) Add the @ToString.Exclude annotation to both sides
+
 
     // the @Id annotation tells hibernate that this is the primary key for this entity
     @Id
@@ -13,6 +24,10 @@ public class Employee {
     // this defines the database column
     @Column(name = "id")
     private int id;
+
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<Customer> customers;
 
     @Column(name = "office_id")
     private int officeId;
@@ -139,6 +154,13 @@ public class Employee {
         this.profileImageUrl = profileImageUrl;
     }
 
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
+    }
 
     @Override
     public String toString() {

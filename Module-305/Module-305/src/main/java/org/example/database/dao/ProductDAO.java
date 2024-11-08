@@ -26,6 +26,9 @@ public class ProductDAO {
 
         // in an older style of hibernate we need to use the merge function when we want to do an update
         try {
+            if ( product.getId() == 0 ) {
+                session.persist(product);
+            }
             session.merge(product);
             session.getTransaction().commit();
         } catch ( Exception e ) {
@@ -128,6 +131,22 @@ public class ProductDAO {
         } finally {
             session.close();
         }
+    }
+
+    public List<Product> findByOrderId(Integer orderId){
+        String hqlQuery = "SELECT p FROM Product p, OrderDetail od WHERE p.id = od.productId and od.orderId = :orderId";
+        Session session = factory.openSession();
+        TypedQuery<Product> query = session.createQuery(hqlQuery,Product.class);
+        query.setParameter("orderId",orderId);
+        try {
+            List<Product> result = query.getResultList();
+            return result;
+        } catch ( Exception e ) {
+            return new ArrayList<>();
+        } finally {
+            session.close();
+        }
+
     }
 
     public List<Product> findByOrderId(int orderId) {

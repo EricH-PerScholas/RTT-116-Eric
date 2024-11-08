@@ -3,6 +3,8 @@ package org.example.database.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.awt.print.Book;
+
 @Entity
 @Table(name = "customers")
 @AllArgsConstructor
@@ -12,10 +14,28 @@ import lombok.*;
 @ToString
 public class Customer {
 
+    // To add a one to many relationship steps
+    // 1) Goto the example website and create the @OneToMany and @ManyToOne annoations
+    // 2) In the entity with the foreign key mark that colum as insertable = false and updateable = false
+    // 3) Add the @ToString.Exclude annotation to both sides
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "sales_rep_employee_id", nullable = false)
+    @ToString.Exclude
+    private Employee employee;
+
+    // now that we have the @ManyToOne mapping using the same column name for the @JoinColumn
+    // hibernate is confused as the colum sales_rep_employee_id is not ambigous to hibernate
+    // to solve this problem, we make this field read only by adding insertable = false and updateable = false
+    // TL;DR; - The foreign key must be marked as read only for hibernate
+    @Column(name = "sales_rep_employee_id", insertable = false, updatable = false)
+    private Integer salesRepEmployeeId;
 
     @Column(name = "customer_name")
     private String customerName;
@@ -47,8 +67,7 @@ public class Customer {
     @Column(name = "country")
     private String country;
 
-    @Column(name = "sales_rep_employee_id")
-    private Integer salesRepEmployeeId;
+
 
     @Column(name = "credit_limit", columnDefinition = "DECIMAL")
     private Double creditLimit;
