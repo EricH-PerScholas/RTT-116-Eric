@@ -18,8 +18,11 @@
         <property name="connection.password">ultra30dev</property>
 
         <!-- this is for debugging your code -->
-        <property name="hibernate.show_sql" >false</property>
+        <property name="hibernate.show_sql" >true</property>
         <property name="hibernate.format_sql" >true </property>
+
+        <!-- allow hibernate to get stuff even after the session is closed -->
+        <property name="hibernate.enable_lazy_load_no_trans">true</property>
 
         <!-- connection pool reduces the load on the server -->
         <property name="connection.pool_size">3</property>
