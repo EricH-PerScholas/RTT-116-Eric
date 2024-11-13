@@ -20,6 +20,8 @@ public class FridayHomework4TheEasyAndCorrectWay {
          OrderDetail od = orderDetailsDAO.findByOrderIdAndProductId(o.getId(), p.getId());
 
          if (od == null) {
+             od = new OrderDetail();
+             
              // this is a create because the combination of orderid and productid was not found in the database so we can create it
              od.setOrderId(o.getId());
              od.setProductId(p.getId());
