@@ -91,15 +91,24 @@ order by e.id, customer_name, order_id, product_name;
 --  and I want to see the product that was ordered the most on top
 -- hint 1 - the orderdetail table will contain 1 record for each tiem the product was ordered
 -- hint 2 - needs a group by
-select od.order_id as order_number, count(*), sum(quantity_ordered)
+select od.order_id as order_number, count(*), sum(quantity_ordered) as qty_ordered
 from orderdetails od
 group by od.order_id
 order by od.order_id;
 
 selecT * from orderdetails where order_id = 10100 order by id;
-
+select * from em
 -- 
 
+UPDATE `classic_models`.`customers`
+SET
+`credit_limit` = <{credit_limit: }>
+WHERE `id` = <{expr}>;
 
 
+select * from employees;
+select * from products;
 
+select c.* from customers c, employees e where e.id = c.sales_rep_employee_id;
+
+select * from customers order by id desc;

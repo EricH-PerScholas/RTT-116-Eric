@@ -26,9 +26,12 @@ select ifnull(comments, 'Replace comment')
 from orders;
 
 -- this is a wrong qury ***********
+-- this will always return 0 records
 select * from orders where comments = null;
+
 -- this the the way to check if something is null
-select * from orders where comments is not null;
+select * from orders where comments is null;
+select * from orders where id is null;
 
 -- this is not equals
 select * from orders where id != 10107;
