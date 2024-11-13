@@ -17,6 +17,7 @@ public class OrderDetailsDAO {
         session.getTransaction().begin();
         session.persist(odObject);
         session.getTransaction().commit();
+
     }
 
     public void deleteOrderDetail(OrderDetail odObject) {
@@ -36,7 +37,11 @@ public class OrderDetailsDAO {
     public OrderDetail findByOrderIdAndProductId(int orderId, int productId) {
         Session session = factory.openSession();
 
+
         String hql = "SELECT od from OrderDetail od where od.orderId = :orderId and od.productId = :productId";
+
+        // Advanced HQL query allows us to use the annotations to allow hibernate to do the joins for us
+        //String hql = "SELECT od from OrderDetail od where od.order.id = :orderId and od.product.id = :productId";
 
         TypedQuery<OrderDetail> query = session.createQuery(hql, OrderDetail.class);
         query.setParameter("orderId", orderId);

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "orders")
@@ -39,5 +41,12 @@ public class Order {
 
     @Column(name = "comments", columnDefinition = "TEXT")
     private String comments;
+
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<OrderDetail> orderDetails;
+
+
 
 }

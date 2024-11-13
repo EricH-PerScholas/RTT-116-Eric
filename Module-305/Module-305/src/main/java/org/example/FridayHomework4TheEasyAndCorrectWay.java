@@ -21,10 +21,14 @@ public class FridayHomework4TheEasyAndCorrectWay {
 
          if (od == null) {
              od = new OrderDetail();
-             
+
              // this is a create because the combination of orderid and productid was not found in the database so we can create it
-             od.setOrderId(o.getId());
-             od.setProductId(p.getId());
+             // these 2 lines of code will no longer work because I added annotations
+             //od.setOrderId(o.getId());
+             //od.setProductId(p.getId());
+             od.setOrder(o);
+             od.setProduct(p);
+
              od.setQuantityOrdered(100);
              od.setPriceEach(1.99);
              od.setOrderLineNumber(1);

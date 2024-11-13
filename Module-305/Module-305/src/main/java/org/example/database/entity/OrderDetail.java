@@ -18,10 +18,20 @@ public class OrderDetail {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "order_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "order_id", nullable = false)
+    @ToString.Exclude
+    private Order order;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "product_id", nullable = false)
+    @ToString.Exclude
+    private Product product;
+
+    @Column(name = "order_id", insertable = false, updatable = false)
     private int orderId;
 
-    @Column(name = "product_id")
+    @Column(name = "product_id", insertable = false, updatable = false)
     private int productId;
 
     @Column(name = "quantity_ordered")
