@@ -13,11 +13,12 @@ public class CustomerDAO {
 
     private SessionFactory factory = new Configuration().configure().buildSessionFactory();
 
-    public void createCustomer(Customer customer) {
+    public Customer createCustomer(Customer customer) {
         Session session = factory.openSession();
         session.getTransaction().begin();
         session.persist(customer);
         session.getTransaction().commit();
+        return customer;
     }
 
     public void deleteCustomer(Customer customer) {
