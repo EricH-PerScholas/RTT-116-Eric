@@ -28,11 +28,12 @@ public class CustomerDAO {
         session.getTransaction().commit();
     }
 
-    public void updateCustomer(Customer customer) {
+    public Customer updateCustomer(Customer customer) {
         Session session = factory.openSession();
         session.getTransaction().begin();
         session.merge(customer);
         session.getTransaction().commit();
+        return customer;
     }
 
     public Customer findCustomerById(Integer id){

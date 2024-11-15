@@ -4,6 +4,8 @@ import org.example.database.entity.Customer;
 import org.example.database.entity.Employee;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class CustomerDAOTest {
 
@@ -55,10 +57,16 @@ public class CustomerDAOTest {
         // then
         // we want to make sure taht the object now has an id
         Assertions.assertNotNull(actual.getId());
+        // this is hibernate not updating the read only column
+        // disapointing that hinbernate will not refresh this
         Assertions.assertNull(actual.getSalesRepEmployeeId());
 
+        // typically we would check all fields on the entity to ensure that all fields are correct
         Assertions.assertEquals(given.getContactFirstname(), actual.getContactFirstname());
         Assertions.assertEquals(given.getContactLastname(), actual.getContactLastname());
+
+        // when dealing with dates most of the time you can just check not null because I dont care about the specific time
+        // checking dates using not null can be okay at times.
 
         // create an additional assertion to check the employee id is correct
         Assertions.assertEquals(employee.getId(), actual.getEmployee().getId());
@@ -66,6 +74,19 @@ public class CustomerDAOTest {
 
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "103, Atelier graphique",
+            "112, Signal Gift Stores",
+            "114, 'Australian Collectors, Co.'"
+    })
+    public void findByIdTest(int customerId, String customerName) {
+        // this is not a very good test .. just doing it to show how this works
+        // given
+        // when
+        Customer actual = customerDAO.findCustomerById(customerId);
 
-
+        // then
+        Assertions.assertEquals(customerName, actual.getCustomerName());
+    }
 }

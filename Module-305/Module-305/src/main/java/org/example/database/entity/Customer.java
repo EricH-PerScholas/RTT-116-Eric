@@ -26,7 +26,7 @@ public class Customer {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "sales_rep_employee_id", nullable = false)
+    @JoinColumn(name = "sales_rep_employee_id")
     @ToString.Exclude
     private Employee employee;
 
