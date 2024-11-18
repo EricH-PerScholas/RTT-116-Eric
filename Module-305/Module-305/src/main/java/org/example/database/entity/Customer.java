@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.awt.print.Book;
+import java.util.Objects;
 
 @Entity
 @Table(name = "customers")
@@ -12,14 +13,13 @@ import java.awt.print.Book;
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode
 public class Customer {
 
     // To add a one to many relationship steps
     // 1) Goto the example website and create the @OneToMany and @ManyToOne annoations
     // 2) In the entity with the foreign key mark that colum as insertable = false and updateable = false
     // 3) Add the @ToString.Exclude annotation to both sides
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -28,6 +28,7 @@ public class Customer {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "sales_rep_employee_id")
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Employee employee;
 
     // now that we have the @ManyToOne mapping using the same column name for the @JoinColumn
@@ -67,9 +68,8 @@ public class Customer {
     @Column(name = "country")
     private String country;
 
-
-
     @Column(name = "credit_limit", columnDefinition = "DECIMAL")
     private Double creditLimit;
+
 
 }
