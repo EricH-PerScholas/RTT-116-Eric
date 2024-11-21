@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+
+<body>
+    <form>
+        <label for="firstname">First Name</label>
+        <input type="text" id="firstname" name="firstname" value="">
+
+        <br />
+        Last Name <input type="text" name="lastname" value="" placeholder="last name">
+
+        <br/>
+        <!-- type=email tells the browser to enforce a little bit of email
+          validation before allowing the user to submit the form 
+          in essence this works the exact same ways as the input type=text
+          accept that it does the extra validation -->
+        Email <input type="email" name="email" value="">
+
+        <br/>
+        <br/>
+        <!-- password acts like a regular text input field accept that it
+           does not show the user what character they are typing -->
+        Password <input type="password" name="password" value="">
+
+        <br /><br />
+        <select name="name">
+            <option>Option 1</option>
+            <option>Option 2</option>
+        </select>
+
+        <br /><br />
+        <textarea name="textarea" rows="10" cols="50">
+            This has some text in it
+        </textarea>
+
+        <br /><br />
+        <!-- checkboxes can allow 0 or more to be selected by the user in the form
+          and checkboxes use different names for each checkbox-->
+        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+        <label for="vehicle1"> I have a bike</label>
+        <br>
+
+        <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+        <label for="vehicle2"> I have a car</label>
+        <br>
+
+        <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+        <label for="vehicle3"> I have a boat</label>
+        <br>
+
+        <br>
+        <!-- the 3 raido inputs all have the same name, so that the browser can 
+            keep them together as an input group and enforce that only 1 is selected -->
+        <input type="radio" id="html" name="fav_language" value="HTML">
+        <label for="html">HTML</label>
+        <br>
+
+        <input type="radio" id="css" name="fav_language" value="CSS">
+        <label for="css">CSS</label>
+        <br>
+        
+        <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+        <label for="javascript">JavaScript</label>
+
+        <!-- file upload input -->
+         <br/>
+         <br/>
+        <input type="file" name="fileupload">
+
+        <br><br>
+        <!-- this first button could be used to send the user somewhere-->
+        <input type="button" value="Cancel">
+        <!-- this button with type = submit causes the browser to send all 
+           of the input fields to the server side for form submission-->
+        <button type="submit">Submit</button>
+
+        <br/>
+        <br/>
+
+        <a href="https://www.w3schools.com/html/html_form_input_types.asp" target="_blank">Click here for more form input examples</a>
+
+    </form>
+</body>
+
+</html>
