@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+
+    <!-- we got this snippet of code from fonts.google.com -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playwrite+AU+VIC:wght@100..400&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
 
 
     <!-- a best practice is to have a global.css sheet that is used on all pages only 
@@ -25,19 +34,24 @@
     <style>
         /* this will apply the css properties to all p and span tags
           in the document */
-        p, span {
-            color: red;
-            background-color: beige;
-            font-weight:400;
-            font-size:30px;
+        p,
+        span {
+            color: #5f17cb;
+            background-color: rgb(46, 238, 16);
+            font-weight: 400;
+            font-size: 30px;
+            font-family: "Roboto", sans-serif;
+            border-radius: 5px;
         }
 
         /* all custom classes in css begin with a . */
         .customclass {
-            color:blue;
-            margin: 15px;  /* this will apply to all 4 sides */
-            margin: 10px 10px 10px 10px; /* top, right, bottom, left */
-            padding-top:5px;
+            color: blue;
+            margin: 15px;
+            /* this will apply to all 4 sides */
+            margin: 10px 10px 10px 10px;
+            /* top, right, bottom, left */
+            padding-top: 5px;
             padding-bottom: 15px;
             padding-left: 10px;
             padding-right: 20px;
@@ -45,16 +59,34 @@
             background-color: bisque;
         }
 
+        .pseudo {
+            /* this class is applied when the mouse is not over the element */
+            background-color: brown;
+        }
+
+        .pseudo:hover {
+            /* this is applied only when the mouse is over the tag */
+            background-color: blue;
+            padding: 15px;
+        }
+
+        .pseudo:active {
+            /* this is applied only when the mouse is clicked on the tag */
+            background-color: chartreuse;
+            padding: 20px;
+        }
+
         #anything {
             background-color: aliceblue;
         }
     </style>
 
+
     <h1>Styled externally</h1>
 
-    <p>This has some text in it.</p>
+    <p style="font-family: Roboto, sans-serif;">This has some text in it and has a differnt font.</p>
 
-    <p>this is paragraph 2</p>
+    <p style="text-align: center;">this is paragraph 2</p>
 
     <!-- this is inline styling where we use the style attribute
       on the html tag itself.   This styling has the higest 
@@ -70,6 +102,21 @@
 
     <div class="defined-external">This is defined in external.css</div>
 
-    <span>this is a span</span>
+    <div class="pseudo">Hover over me to change the color</div>
+
+    <!-- this is good to know that you can hide an element from being 
+     using css display:none -->
+    <div style="display:none">This will not display</div>
+
+    <div>
+        <span>this is a span</span>
+    </div>
+    <span>this is now the last child</span>
+
+
+
+    <img height=100 src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png">
+
 </body>
+
 </html>
