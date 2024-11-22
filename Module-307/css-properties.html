@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <!-- a best practice is to have a global.css sheet that is used on all pages only 
+    put stuff in there that goes for all pages. Then on each individual page
+    you either put the styling interal to the page OR you create an 
+    exteranl CSS file for that page ... however my preference is to put the 
+    css interal to the page so it is easier to read and find
+    -->
+    <!-- typically you import your style sheet here in the head however
+     it can go anywhere in the document.  we do it here for SEO and 
+     reduce time to first reder of page -->
+    <link rel="stylesheet" href="/pub/css/external.css">
+
+</head>
+
+
+<body>
+    <!-- this is whats called internal styling -->
+    <style>
+        /* this will apply the css properties to all p and span tags
+          in the document */
+        p, span {
+            color: red;
+            background-color: beige;
+            font-weight:400;
+            font-size:30px;
+        }
+
+        /* all custom classes in css begin with a . */
+        .customclass {
+            color:blue;
+            margin: 15px;  /* this will apply to all 4 sides */
+            margin: 10px 10px 10px 10px; /* top, right, bottom, left */
+            padding-top:5px;
+            padding-bottom: 15px;
+            padding-left: 10px;
+            padding-right: 20px;
+            border-top: 1px solid black;
+            background-color: bisque;
+        }
+
+        #anything {
+            background-color: aliceblue;
+        }
+    </style>
+
+    <h1>Styled externally</h1>
+
+    <p>This has some text in it.</p>
+
+    <p>this is paragraph 2</p>
+
+    <!-- this is inline styling where we use the style attribute
+      on the html tag itself.   This styling has the higest 
+      presidence and will overwrite internal and exteral CSS -->
+    <p style="color:black;">this is paragraph 3</p>
+
+    <!-- we are using class attribute to apply a CSS class
+       which is defined above as .customclass -->
+    <div class="customclass">This is p4</div>
+    <div class="customclass">This is p5</div>
+
+    <div id="anything">This is more text with an id on the div</div>
+
+    <div class="defined-external">This is defined in external.css</div>
+
+    <span>this is a span</span>
+</body>
+</html>
