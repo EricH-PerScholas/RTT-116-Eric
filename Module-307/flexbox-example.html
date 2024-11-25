@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flex Box</title>
+
+
+    <style>
+        .container {
+            /* this turns on flex for the container */
+            /* the container is simply a div box that the elements will be inside of */
+            display: flex;
+            /* this is for hoizontal alignment */
+            justify-content: space-between;
+            /* this is for vertical alignment */
+            align-items: center;
+            /* this makes the items horizontal or vertical */
+            flex-direction: row;
+            /* allow the elements to wrap to the next row or not */
+            flex-wrap:wrap;
+
+
+            height:300px;
+        }
+        .boxes{
+            border: .1px solid;
+            width: 99px;
+            height: 99px;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        #box1{
+            background-color: green;
+        }
+        #box2{
+            background-color: yellow;
+            /* this allows the element to consume the extra white space that would not be used otherwise */
+            flex-grow: 1;
+        }
+        #box3{
+            background-color: pink;
+        }
+        #box4{
+            background-color: blue;
+            flex-grow: 1;
+        }
+        #box5{
+            background-color: red;
+        }
+        #box6{
+            background-color: orange;
+        }
+        #box7{
+            background-color:beige;
+        }
+        #box8{
+            background-color: lightgrey;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>The Flex model </h1>
+
+<div class="container">
+    <!--     flex items-->
+    <div class="boxes" id="box1">1</div>
+    <div class="boxes" id="box2">2</div>
+    <div class="boxes" id="box3">3</div>
+    <div class="boxes" id="box4">4</div>
+    <div class="boxes" id="box5">5</div>
+    <div class="boxes" id="box6">6</div>
+    <div class="boxes" id="box7">7</div>
+    <div class="boxes" id="box8">8</div>
+
+    <!-- these 2 are cards but a card is really just 
+      a container that we put an image and some text in
+      these cards will follow the same flexbox rules
+      and everything inside the card will move when the 
+      card container is positioned by the flex box -->
+    <div class="card-body">
+        <div class="img-container">
+          <img src="/images/image-example.svg" alt="">
+        </div>
+        <h1>Heading</h1>
+        <p>Lorem ipsum ..</p>
+    </div>
+    <div class="card-body">
+        <div class="img-container">
+          <img src="/images/image-example.svg" alt="">
+        </div>
+        <h1>Heading</h1>
+        <p>Lorem ipsum ..</p>
+    </div>
+</div>
+
+</body>
+</html>
