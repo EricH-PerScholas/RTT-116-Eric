@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <!-- html comment -->
     <script>
-        
+
         // !!!!!! best practicce is to always use let when defining variables and only
         // use var when you know you need it globally avilable for the document.   Have to 
         // have a reason why you think it should be global.
@@ -22,12 +24,14 @@
         var b = "String";
         var c = true;
         let x = 10;
-        
-        function abc() {
+
+        function abc(arg1, arg2) {
             // let scopes this variable to the containing {}
-            let x = 15;
+            let x = 15 + arg1;
             var y = 20;
             console.log(y);
+
+            return "some value";
         }
 
         console.log(x);
@@ -35,7 +39,7 @@
         // x is not available here because it is confied inside the function
         // y IS available here because it was defined as a var which is global scope to the document
 
-        abc();
+        var r = abc("one");
 
         // this is similar to System.out.println("") and writes to the console on the browser inspect
         console.log("hello world");
@@ -54,11 +58,66 @@
         // when using + if one of your variables is a string then it will
         // do string concatination rather than aritmatic
         let o = "8";
-        console.log(o + 8);
-        console.log("8" + 8);
-        console.log(8 + "8");
+        try {
+            console.log(o + 8);
+            console.log("8" + 8);
+            console.log(8 + "8");
+
+            var z = 10 / 0;
+        } catch (error) {
+
+        }
+
+        // javscript value object can be much simpler than a Java entity
+        let person = {
+            firstName: "John",
+            lastName: "Doe",
+            age: 50,
+            eyeColor: "blue"
+        };
+
+        // using for ... in it looks over the keys not the values
+        for (let key in person) {
+            console.log(key + " == " + person[key]);
+        }
+
+        
+
+        // there are many differnt ways of accessing the properties of person
+        console.log(person.firstName);
+        console.log(person["firstName"]);
+
+        person.height = "59"
+
+        let key = "height";
+        console.log(person.height);
+        console.log(person["height"]);
+        console.log(person[key]);
+
+        // arrays work very similar to java but they are much more flexible.
+        let arr = [];
+        arr[1] = null;
+        arr[5] = 2468;
+        arr[10] = 1234;
+        console.log(arr);
+        console.log(arr.length);
+
+        // split 
+        let data = "a, b, c, d, e";
+        let dataArr = data.split(",")
+        console.log(dataArr);
+
+        // using for ... of it loop over the values of the array
+        // similar to a new style for loop in java to loop over list or array
+        for (let value of arr) {
+            console.log(value);
+        }
+
+        // there is also a for each - similar to a java lambda
+        arr.forEach(element => {console.log("for each " + element)})
 
     </script>
     <h1>Javascript Basics</h1>
 </body>
+
 </html>
