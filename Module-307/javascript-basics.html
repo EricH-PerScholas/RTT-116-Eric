@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- html comment -->
+    <script>
+        
+        // !!!!!! best practicce is to always use let when defining variables and only
+        // use var when you know you need it globally avilable for the document.   Have to 
+        // have a reason why you think it should be global.
+
+        // var becomes a global variable accesable by any function
+        // in the document 
+        /* can also do this java style ... this is dangerous i have seen pages not work
+          and be very hard to diagnose why due to this commenting especially when 
+          there are code chunks within it. */
+        var a = 10;
+        var b = "String";
+        var c = true;
+        let x = 10;
+        
+        function abc() {
+            // let scopes this variable to the containing {}
+            let x = 15;
+            var y = 20;
+            console.log(y);
+        }
+
+        console.log(x);
+
+        // x is not available here because it is confied inside the function
+        // y IS available here because it was defined as a var which is global scope to the document
+
+        abc();
+
+        // this is similar to System.out.println("") and writes to the console on the browser inspect
+        console.log("hello world");
+
+
+        // == is comparing the value
+        let e1 = 3 == 3; // isEqual is true
+        let e2 = 3 == "3"; // isEqual is true
+        let e3 = "3" == "3"; // isEqual is true
+
+        // === compares the value and the type
+        let e4 = "3" === 3; // e4 is false because === compares the type
+        let e5 = 3 === 3; // this is true because same type and same value
+
+        // common gotacha in javascript
+        // when using + if one of your variables is a string then it will
+        // do string concatination rather than aritmatic
+        let o = "8";
+        console.log(o + 8);
+        console.log("8" + 8);
+        console.log(8 + "8");
+
+    </script>
+    <h1>Javascript Basics</h1>
+</body>
+</html>
