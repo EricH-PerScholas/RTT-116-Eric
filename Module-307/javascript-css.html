@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .anything {
+        text-decoration: underline;
+    }
+    .anything1 {
+        /* this is second priority */
+        /* color:yellow !important;  we can use !important to make this property show even tho its not the highest presidence */
+        color: yellow;
+        text-decoration: underline;
+    }
+</style>
+<body>
+    <h1 id="header">This is the header</h1>
+</body>
+<script>
+    // query the element from the document
+    let h = document.querySelector('#header');
+
+    // h.style.<any css property>
+    // this is modifying the style attribute on the HTML element itself
+    // the style attribute has the highest CSS presidence
+    h.style.color= 'green';
+    // the real css property is background-color
+    // which gets converted to camelCase for javascript
+    h.style.backgroundColor = 'red';
+    h.style.fontSize = '50px';
+    
+    // adding a CSS Class that has underline
+    // h.classList returns a list of all css classes applied to this element
+    // these CSS classes can be either internal or external
+    // internal CSS class will have higher presidence than external class
+    // the reson why the text is not yellow is because the set the style tag to green
+    // which has a higher presidence
+    let cssClasses = h.classList;
+    cssClasses.add("anything");
+    cssClasses.add("anything1");
+
+    // removeing the same CSS class
+    //h.classList.remove("anything");
+</script>
+</html>

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
 </head>
-
 
 
 <body>
@@ -16,24 +16,48 @@
     <input id="firstname2" name="firstname" type="text">
     <p class="cssclassname">This is a second paragraph</p>
     <span class="cssclassname">This is a span</span>
+    <ul>
+        <li>item 1</li>
+        <li>item 1.5</li>
+        <li>item 2</li>
+    </ul>
 </body>
 
 <script>
-    // most of the time we want to wait to run the javascript on document ready 
+    // most of the time we want to wait to run the javascript on document ready
+    // for this example we have our script at the end of the file so that it will
+    // work propery after all html element have been read by the browser and 
+    // added to the DOM tree in memory.
+    // if we want this at the top of the file .. we need to put some addtional
+    // code to tell the javascript to wait until the document is ready before 
+    // running the javascript.
+    // these 2 will get the same element
     let h = document.getElementById("header");
+    // this uses a CSS query selector to get the elements and will return a list
+    // of elements 
+    let h1 = document.querySelector('#header');
+
     console.log(h);
+    //h.remove();
 
     // most used and most important to know and understand 
     // this can be thought about similar to a primary key in the database
     let p = document.getElementById("para");
+   
     console.log(p);
-    console.log(p.innerText);
-    p.innerText = "Some new next assigned via javascript";
+    // this will print out in the conosole what was actually typed in the html
+    console.log("before -> " + p.innerText);
+    // this one will only change the content within the tag
+    p.innerText = "Some new text assigned via javascript";
+    console.log("after -> " +p.innerText);
+    // this one will replace the content with HTML + content
+    p.innerHTML = "<b><i>some other new html</i></b>";
 
     // css classes are always express as .classname which is why you are are seeing
     // that in the console debugger in chrome
     // this is used second most 
     let c = document.getElementsByClassName("cssclassname");
+    let c1 = document.querySelector('.cssclassname');
     console.log(c);
 
     // these 2 are used but not very often
@@ -42,7 +66,20 @@
 
     // this is the HTML tag name passed in
     let ps = document.getElementsByTagName("p");
+    let p1 = document.querySelector('p');
     console.log(ps);
+
+    // css query select for all p tags and all span tags
+    let cs = document.querySelector("p, span")
 </script>
+<style>
+    p, span {
+        background-color: aqua;
+    }
+
+    #header {
+        background-color: blue;
+    }
+</style>
 
 </html>
