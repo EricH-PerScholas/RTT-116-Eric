@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+<body>
+    <h1 id="header">This is the header</h1>
+    <p id="para">This is a paragraph with some text</p>
+    First Name
+    <input id="firstname1" name="firstname" type="text">
+    <input id="firstname2" name="firstname" type="text">
+    <p class="cssclassname">This is a second paragraph</p>
+    <span class="cssclassname">This is a span</span>
+</body>
+
+<script>
+    // most of the time we want to wait to run the javascript on document ready 
+    let h = document.getElementById("header");
+    console.log(h);
+
+    // most used and most important to know and understand 
+    // this can be thought about similar to a primary key in the database
+    let p = document.getElementById("para");
+    console.log(p);
+    console.log(p.innerText);
+    p.innerText = "Some new next assigned via javascript";
+
+    // css classes are always express as .classname which is why you are are seeing
+    // that in the console debugger in chrome
+    // this is used second most 
+    let c = document.getElementsByClassName("cssclassname");
+    console.log(c);
+
+    // these 2 are used but not very often
+    let i = document.getElementsByName("firstname");
+    console.log(i);
+
+    // this is the HTML tag name passed in
+    let ps = document.getElementsByTagName("p");
+    console.log(ps);
+</script>
+
+</html>
