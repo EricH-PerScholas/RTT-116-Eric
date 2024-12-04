@@ -17,7 +17,14 @@
     }
 </style>
 <body>
-    <h1 id="header">This is the header</h1>
+    <h1 id="header" class="abc" style="font-weight: 500;">This is the header</h1>
+    <p>this is a paragraph</p>
+    <div>
+        <!-- I may want to find all the divs inside a div -->
+         <!-- a common way is to add a css class to all the elements so you can query -->
+        <div id="someTarget" class="someOtherTarget"></div>
+        <div class="someOtherTarget"></div>
+    </div>
 </body>
 <script>
     // query the element from the document
@@ -43,6 +50,6 @@
     cssClasses.add("anything1");
 
     // removeing the same CSS class
-    //h.classList.remove("anything");
+    //h.classList.remove("abc");
 </script>
 </html>

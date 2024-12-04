@@ -12,8 +12,8 @@
     <h1 id="header">This is the header</h1>
     <p id="para">This is a paragraph with some text</p>
     First Name
-    <input id="firstname1" name="firstname" type="text">
-    <input id="firstname2" name="firstname" type="text">
+    <input id="firstname1" name="firstname" class="firstname" type="text">
+    <input id="firstname2" name="firstname" class="firstname" type="text">
     <p class="cssclassname">This is a second paragraph</p>
     <span class="cssclassname">This is a span</span>
     <ul>
@@ -62,7 +62,9 @@
 
     // these 2 are used but not very often
     let i = document.getElementsByName("firstname");
-    console.log(i);
+    let i1 = document.querySelectorAll("input[name='firstname']");
+    console.log("i = " + i);
+    console.log("i1 = " + i1);
 
     // this is the HTML tag name passed in
     let ps = document.getElementsByTagName("p");
