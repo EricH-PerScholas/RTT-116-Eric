@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>HTML5 Form Validation</h1>
+
+    <form>
+        <div>
+            Phone <input type="text" 
+            name="phone"
+            pattern="\d{4}">
+        </div>
+
+        <div>
+            First Name <input type="text" required minlength="3" maxlength="5">
+        </div>
+        <div>
+            Last Name <input type="text" required>
+        </div>
+        <div>
+            Email <input type="email" required>
+        </div>
+        <div>
+            Age <input type="number" min="100" max="1000">
+        </div>
+       
+
+        <button type="submit">Submit</button>
+        <button>Cancel</button>
+    </form>
+
+</body>
+
+</html>
