@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- jquery is always loaded at the top of the file because its needed by so many other libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<!-- this stuff I want you to do manually and not use the HTML5 built in validations -->
+<!-- Add another input field for last name and write check to make sure that the last name is not empty -->
+<!-- add another check to make sure that the last name starts with a capital letter -->
+<!-- follow the pattern for first name and when the last name has an error message I want you to display the correct eeror message under the input field -->
+<!-- change the color of the last name field label to be red but not the * -->
+<!-- change the background color of the input field to be red -->
+<!-- when the user enters the last name correctly, I want you to change everthing back to initial state (no need to use variables) -->
+<!-- add an email input field and check to make sure that the email has @ in it as a validation -->
+
+<!-- add a select dropdown with 4 options in it ... then create a jquery listener for the select box on change print out the value that was selected --> 
+<body>
+    <script>
+        function submitFunction(event) {
+            // this is important to know that a form when the submit button is clicked has 2 operations
+            // first is to get the input elements and create the URL with the user entered data
+            // second will cause a page reload as the user data is sent to the server side
+            event.preventDefault();
+
+            console.log("Submit clicked");
+            console.log(event);
+
+            // get out firstname input field and get the value that the user entered
+            let fn = $("#firstname").val();
+            // TODO HOMEWORK : Add another check here to make sure that no numbers are in the first name
+            if ( fn == "" ) {
+                console.log("First name is required");
+                $("#fns").css("color","red");
+                $("#firstname").css("border-color","red");
+                $("#fnerror").text("First name is required");
+            } else {
+                console.log("user entered " + fn);
+                $("#fns").css("color","black");
+                $("#firstname").css("border-color","black");
+            }
+        }
+    </script>
+
+    <h1>Jquery Form Validation</h1>
+
+    <!-- using the onSubmit attribute of the form tag we can execut a javascript function 
+        when an event happens .. in this case ... the submit button on the form is clicked -->
+    <form onSubmit="submitFunction(event)">
+        First Name <span id="fns">*</span> <input type="text" id="firstname" name="firstname">
+        <div id="fnerror"></div>
+        <br />
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        $('form').on('submit'), function() {
+            // this is the jquery way of doing form submission
+        }
+
+        $("#firstname").on('focus', function (event) {
+            console.log("firstname has focus");
+            console.log(event);
+        });
+        $("#firstname").on('blur', function (event) {
+            console.log("firstname has blur");
+            console.log(event);
+        });
+    </script>
+
+</body>
+
+</html>
