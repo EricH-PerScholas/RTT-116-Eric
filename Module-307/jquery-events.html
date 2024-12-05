@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- jquery is always loaded at the top of the file because its needed by so many other libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>Form Validation with JQuery</h1>
+
+    <button id="b1" class="btnclass">Button 1</button>
+    <button id="b2" class="btnclass">Button 2</button>
+</body>
+
+<script>
+    // on the left side inside the quotes is a CSS selector that 
+    // can find one or more elements and apply the function to all of them
+    $("#b1").click(function () {
+        console.log("The button 1 was clicked.");
+    });
+    // this is the same as the function above just different syntax
+    $("#b1").on('click', function(){
+        console.log("Click event btn1 through alternate syntax");
+    });
+
+    // this listener is for when the mouse is over btn1
+    $("#b1").on('mouseenter', function(){
+        console.log("mouse is over btn1");
+        $("#b1").css("background-color", "yellow");
+        $("#b2").hide();
+    });
+    // this listener is for when the mouse exits btn1
+    $("#b1").on('mouseout', function(){
+        console.log("mouse is exited btn1");
+        $("#b1").css("background-color", "grey");
+        $("#b2").show();
+    });
+
+    $("#b2").click(function () {
+        console.log("The button 2 was clicked.");
+    });
+
+    // this uses a CSS selector to get all buttons on the page and 
+    // add a listener to all of them
+    $(".btnclass").click(function() {
+        console.log("All buttton listener clicked");
+    });
+
+    // using raw javascript first we have to find the element
+    let h = document.getElementById("b1");
+    h.addEventListener("click", function (e) {
+        console.log("Button click event handled by javascript"); // logs the className of my_element
+        console.log(e.currentTarget === this); // logs `true`
+    });
+</script>
+
+</html>
