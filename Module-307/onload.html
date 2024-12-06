@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- jquery is always loaded at the top of the file because its needed by so many other libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+</head>
+
+<script>
+    //$(document).ready(function () {
+        $("#header").css("color", "red");
+    //});
+</script>
+
+<script>
+    // !!!!!! When we are using an event listener for a button or form submission
+    // or any kind of event listener we do not need to worry about the onload 
+    // problem because the event (like a button click) can only happen after the 
+    // document is loaded anyway
+
+   // in some ways this is behaving like an event listener because 
+    // when the browser has finished processing all of the CSS and HTML 
+    // it will throw an event that saying the browser is done processing all the 
+    // HTML and CSS
+    $(document).ready(function () {
+        console.log("This prints after because it only runs when the document is ready");
+    });
+</script>
+
+<body>
+    <h1 id="header">On Load Demo</h1>
+</body>
+
+<script>
+    console.log("runs before document is ready");
+</script>
+
+</html>
