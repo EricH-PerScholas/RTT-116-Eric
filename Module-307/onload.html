@@ -12,8 +12,12 @@
 </head>
 
 <script>
+    // when run without the document ready, this does nothing because
+    // #header has not yet been created in the dom tree
+    // if we add back the docuemnt ready, then it waits to run after the browser
+    // has finished loading all elements and will actually turn the h1 read
     //$(document).ready(function () {
-        $("#header").css("color", "red");
+    $("#header").css("color", "red");
     //});
 </script>
 
@@ -23,13 +27,22 @@
     // problem because the event (like a button click) can only happen after the 
     // document is loaded anyway
 
-   // in some ways this is behaving like an event listener because 
+    // in some ways this is behaving like an event listener because 
     // when the browser has finished processing all of the CSS and HTML 
     // it will throw an event that saying the browser is done processing all the 
     // HTML and CSS
     $(document).ready(function () {
         console.log("This prints after because it only runs when the document is ready");
     });
+
+
+    // https://stackoverflow.com/questions/9899372/vanilla-javascript-equivalent-of-jquerys-ready-how-to-call-a-function-whe
+    // self executing function here
+    (function () {
+        // your page initialization code here
+        // the DOM will be available here
+        console.log("This is pure javascript doing the same on ready")
+    })();
 </script>
 
 <body>

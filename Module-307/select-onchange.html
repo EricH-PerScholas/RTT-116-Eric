@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- jquery is always loaded at the top of the file because its needed by so many other libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <h1>Select On Change Example</h1>
+
+    <select id="citySelect">
+        <option></option>
+        <option value="1">New York</option>
+        <option value="2" selected>Denver</option>
+        <option value="3">Chicgao</option>
+        <option value="4">LA</option>
+    </select>
+</body>
+
+<script>
+    $("#citySelect").on("change", function() {
+        var displayName = $('#citySelect').find(":selected").text();
+        var value = $('#citySelect').find(":selected").val();
+
+        console.log(displayName);
+        console.log(value);
+    });
+</script>
+
+</html>
