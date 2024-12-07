@@ -65,8 +65,10 @@
     </form>
 
     <script>
-        $('form').on('submit'), function() {
+        $('form').on('submit'), function(event) {
+            event.preventDefault();
             // this is the jquery way of doing form submission
+            submitFunction(event);
         }
 
         $("#firstname").on('focus', function (event) {
