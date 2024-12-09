@@ -8,6 +8,8 @@
 
     <!-- jquery is always loaded at the top of the file because its needed by so many other libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    
 </head>
 
 <!-- this stuff I want you to do manually and not use the HTML5 built in validations -->
@@ -61,8 +63,11 @@
         <div id="fnerror"></div>
         <br />
         <button type="submit">Submit</button> 
-        <button>Cancel</button>
+        <button onClick="someFunction();">Cancel</button>
     </form>
+
+    
+    <script src=""></script>
 
     <script>
         $('form').on('submit'), function(event) {
@@ -70,7 +75,13 @@
             // this is the jquery way of doing form submission
             submitFunction(event);
         }
-
+    
+        // this is the pure javascript way
+        let el = .... find your element here 
+        el.addEventListener(function(event) {
+            console.log(event);
+        });
+    
         $("#firstname").on('focus', function (event) {
             console.log("firstname has focus");
             console.log(event);

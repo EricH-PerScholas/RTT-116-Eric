@@ -57,7 +57,10 @@
     // that in the console debugger in chrome
     // this is used second most 
     let c = document.getElementsByClassName("cssclassname");
-    let c1 = document.querySelector('.cssclassname');
+    // querySelector only returns the first one found in the document
+    let c1 = document.querySelector('.cssclassname'); 
+    // querySelectorAll returns a list
+    let c2 = document.querySelectorAll('.cssclassname');
     console.log(c);
 
     // these 2 are used but not very often

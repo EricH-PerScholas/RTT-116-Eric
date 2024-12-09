@@ -45,6 +45,46 @@
         console.log("hello world");
 
 
+        console.log("Hello" + " world");
+
+        // what will this this print???? will print 11 because
+        // it sees the string and assume this is a string concatination
+        console.log("1" + 1);
+        console.log(1 + "1");
+
+        //       0123456789
+        let k = "KBA Review";
+        console.log(k.lastIndexOf("e"));
+        console.log(k.substring(4, 5));
+
+        // we cant subtract one string from another AND 
+        // it has a sepecific result that happens NaN
+        console.log("Hello" - " world");
+
+
+        // let will not let you define the same variable 2 times
+        // this is litterally an Error
+        let v1 = "abc";
+        let v1 = "xyz";
+        console.log(v1);
+
+        // var will
+        var v2 = "abc";
+        var v2 = "xyz";
+
+        //      yyyy-MM-dd HH:mm:ss
+        let now = new Date("2019-01-24 18:31:44");
+        //   DDD MMM dd yyyy HH:mm:ss
+        let date = new Date("Thu Jan 29 2009 08:31:44");
+
+        // 1 === 1
+        // True is the actual output printed to the console
+        console.log(now.getMonth() === date.getMonth());
+
+
+        array.forEach()
+
+
         // == is comparing the value
         let e1 = 3 == 3; // isEqual is true
         let e2 = 3 == "3"; // isEqual is true
@@ -78,10 +118,10 @@
 
         // using for ... in it looks over the keys not the values
         for (let key in person) {
-            console.log(key + " == " + person[key]);
+            console.log(key);
         }
 
-        
+
 
         // there are many differnt ways of accessing the properties of person
         console.log(person.firstName);
@@ -114,7 +154,25 @@
         }
 
         // there is also a for each - similar to a java lambda
-        arr.forEach(element => {console.log("for each " + element)})
+        arr.forEach(element => { console.log("for each " + element) })
+
+
+        alert("Some message");
+
+
+        // forEach
+        //         1, 4, 9, 16, 25, 
+        //         ,25, 16, 9, 4, 1
+        let kba19 = [1, 2, 3, 4, 5, ];
+        kba19.forEach(function (value, index, array) {
+            array[index] = value * value
+        });
+        console.log(kba19.reverse().filter(function (x) {
+            // when autoboxing from a number to a boolean ... in javascript
+            // when the result is 0 it means it will remove it from the list
+            // so when the
+            return x % 5
+        }));
 
     </script>
     <h1>Javascript Basics</h1>
