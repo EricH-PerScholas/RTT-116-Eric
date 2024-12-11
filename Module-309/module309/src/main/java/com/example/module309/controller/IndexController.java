@@ -29,6 +29,8 @@ public class IndexController {
             System.out.println(c.toString());
         }
 
+        response.addObject("names", firstNames);
+
         return response;
     }
 
