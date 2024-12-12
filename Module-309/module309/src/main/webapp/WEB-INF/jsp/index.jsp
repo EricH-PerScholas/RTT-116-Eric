@@ -1,3 +1,5 @@
+<%@ page import="com.example.module309.database.entity.Customer" %>
+<%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -19,7 +21,6 @@
         <td>id</td>
         <td>Customer Name</td>
     </tr>
-
     <c:forEach var="name" items="${names}">
         <tr>
             <td>${name.contactFirstname}</td>
