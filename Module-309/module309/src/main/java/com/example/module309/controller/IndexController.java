@@ -50,6 +50,19 @@ public class IndexController {
         return response;
     }
 
+    @GetMapping("/customer/submit")
+    public ModelAndView customerSubmit(@RequestParam(required = false) String firstName,
+                                       @RequestParam(required = false) String lastName){
+
+        Customer customer = new Customer();
+        customer.setContactFirstname(firstName);
+        customer.setContactLastname(lastName);
+
+        customerDao.save(customer);
+
+        return null;
+    }
+
 
     @GetMapping("/courses/{courseId}/external_tools/{toolId}")
     public ModelAndView pathVariable(@PathVariable String courseId, @PathVariable String toolId) {
