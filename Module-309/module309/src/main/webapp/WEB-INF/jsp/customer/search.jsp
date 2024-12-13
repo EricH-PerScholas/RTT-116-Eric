@@ -25,7 +25,7 @@
             <div class="col-6">
                 <div class="mb-3">
                     <label for="firstNameId" class="form-label">First Name</label>
-                    <input type="text" class="form-control" id="firstNameId" name="firstName">
+                    <input type="text" class="form-control" id="firstNameId" name="firstName" value="${search}">
                 </div>
             </div>
         </div>
@@ -41,6 +41,23 @@
     <section>
         <div class="container">
             <h2 class="text-center pt-5">Customers Found (${customersKey.size()})</h2>
+
+            <table class="table mt-5">
+                <tr>
+                    <td>Contact First Name</td>
+                    <td>Contact Last Name</td>
+                    <td>id</td>
+                    <td>Customer Name</td>
+                </tr>
+                <c:forEach var="customer" items="${customersKey}">
+                    <tr>
+                        <td>${customer.contactFirstname}</td>
+                        <td>${customer.contactLastname}</td>
+                        <td>${customer.id}</td>
+                        <td>${customer.customerName}</td>
+                    </tr>
+                </c:forEach>
+            </table>
         </div>
     </section>
 </c:if>

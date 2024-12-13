@@ -25,6 +25,9 @@ public class CustomerController {
         // /WEB-INF/jsp/customer/search.jsp
         response.setViewName("customer/search");
 
+        // add the search field to the model so we can use it on the jsp page
+        response.addObject("search", firstName);
+
         if ( firstName != null ) {
             List<Customer> customers = customerDao.findByFirstName(firstName);
             response.addObject("customersKey", customers);
