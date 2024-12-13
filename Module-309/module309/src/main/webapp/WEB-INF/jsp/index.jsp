@@ -1,18 +1,7 @@
-<%@ page import="com.example.module309.database.entity.Customer" %>
-<%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:include page="include/header.jsp"/>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
 <h1>First Page</h1>
 <table border="1">
     <tr>
