@@ -5,8 +5,6 @@
 <head>
     <title>Title</title>
 
-    <link href="/pub/css/global.css" rel="stylesheet"/>
-
     <!-- these 2 lines are needed to bring in bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -16,10 +14,13 @@
 
     <!-- jquery is always loaded at the top of the file because its needed by so many other libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+    <link href="/pub/css/global.css" rel="stylesheet"/>
 </head>
 <body>
 <section>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +33,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/customer/search">Customer Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/customer/create">Create Customer</a>
                     </li>
                 </ul>
             </div>
