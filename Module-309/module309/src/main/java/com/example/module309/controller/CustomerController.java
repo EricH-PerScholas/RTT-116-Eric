@@ -1,7 +1,10 @@
 package com.example.module309.controller;
 
 import com.example.module309.database.dao.CustomerDAO;
+import com.example.module309.database.dao.EmployeeDAO;
 import com.example.module309.database.entity.Customer;
+import com.example.module309.database.entity.Employee;
+import com.example.module309.form.CreateCustomerFormBean;
 import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,9 @@ public class CustomerController {
 
     @Autowired
     private CustomerDAO customerDao;
+
+    @Autowired
+    private EmployeeDAO employeeDAO;
 
 
     @GetMapping("/customer/search")
@@ -36,11 +42,39 @@ public class CustomerController {
         return response;
     }
 
+
     @GetMapping("/customer/create")
     public ModelAndView createCustomer() {
+        // this just shows us the create page for the first time when the user goes to the page
         ModelAndView response = new ModelAndView();
 
         response.setViewName("customer/create");
+
+        return response;
+    }
+
+    @GetMapping("/customer/createCustomer")
+    public ModelAndView createCustomerSubmit(CreateCustomerFormBean form) {
+        // this is called when the user clicks the submit button on the form
+        ModelAndView response = new ModelAndView();
+
+        response.setViewName("customer/create");
+
+        System.out.println(form);
+
+        Customer customer = new Customer();
+        customer.setCustomerName(form.getCompanyName());
+        customer.setContactFirstname(form.getFirstName());
+        customer.setContactLastname(form.getLastName());
+        customer.setPhone(form.getPhone());
+        customer.setAddressLine1(form.getAddressLine1());
+        customer.setCity(form.getCity());
+        customer.setCountry(form.getCountry());
+
+        Employee employee = employeeDAO.findById(1056);
+        customer.setEmployee(employee);
+
+        customerDao.save(customer);
 
         return response;
     }
