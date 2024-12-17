@@ -100,6 +100,7 @@ public class CustomerController {
                 LOG.debug(error.toString());
             }
             response.addObject("bindingResult", bindingResult);
+            response.addObject("form", form);
         } else {
             Customer customer = new Customer();
             customer.setCustomerName(form.getCompanyName());
