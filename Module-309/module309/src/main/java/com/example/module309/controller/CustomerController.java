@@ -91,6 +91,8 @@ public class CustomerController {
 
         response.setViewName("customer/create");
 
+        // manually do some validations here in the controller
+
         LOG.debug(form.toString());
 
         if (bindingResult.hasErrors()) {
