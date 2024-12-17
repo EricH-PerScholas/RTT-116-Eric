@@ -12,6 +12,8 @@ import org.hibernate.validator.constraints.Length;
 @ToString
 public class CreateCustomerFormBean {
 
+    private Integer id;
+
     // this is called a POJO - Plain Old Java Object
     // this object is called a FormBean
     // this is analgous to a DTO (Data Transport Object)

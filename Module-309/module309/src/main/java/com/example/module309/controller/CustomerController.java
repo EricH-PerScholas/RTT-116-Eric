@@ -97,6 +97,7 @@ public class CustomerController {
 
         CreateCustomerFormBean form = new CreateCustomerFormBean();
 
+        form.setId(customer.getId());
         form.setCompanyName(customer.getCustomerName());
         form.setFirstName(customer.getContactFirstname());
         form.setLastName(customer.getContactLastname());
@@ -128,7 +129,16 @@ public class CustomerController {
             response.addObject("bindingResult", bindingResult);
             response.addObject("form", form);
         } else {
-            Customer customer = new Customer();
+            // when this is a create the id in the form will be null
+            // when it is an edit the id in the form will be populated with the PK to edit
+            // in either case we can try to query the database and its either found or not
+            // if its not found in the database its a create
+            // if it is found in the database then its an edit
+            Customer customer = customerDao.findById(form.getId());
+            if ( customer == null ) {
+                customer = new Customer();
+            }
+
             customer.setCustomerName(form.getCompanyName());
             customer.setContactFirstname(form.getFirstName());
             customer.setContactLastname(form.getLastName());
