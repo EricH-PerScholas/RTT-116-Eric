@@ -97,21 +97,22 @@ public class CustomerController {
             for (ObjectError error : bindingResult.getAllErrors()) {
                 LOG.debug(error.toString());
             }
+            response.addObject("bindingResult", bindingResult);
+        } else {
+            Customer customer = new Customer();
+            customer.setCustomerName(form.getCompanyName());
+            customer.setContactFirstname(form.getFirstName());
+            customer.setContactLastname(form.getLastName());
+            customer.setPhone(form.getPhone());
+            customer.setAddressLine1(form.getAddressLine1());
+            customer.setCity(form.getCity());
+            customer.setCountry(form.getCountry());
+
+            Employee employee = employeeDAO.findById(1056);
+            customer.setEmployee(employee);
+
+            customerDao.save(customer);
         }
-
-        Customer customer = new Customer();
-        customer.setCustomerName(form.getCompanyName());
-        customer.setContactFirstname(form.getFirstName());
-        customer.setContactLastname(form.getLastName());
-        customer.setPhone(form.getPhone());
-        customer.setAddressLine1(form.getAddressLine1());
-        customer.setCity(form.getCity());
-        customer.setCountry(form.getCountry());
-
-        Employee employee = employeeDAO.findById(1056);
-        customer.setEmployee(employee);
-
-        customerDao.save(customer);
 
         return response;
     }
