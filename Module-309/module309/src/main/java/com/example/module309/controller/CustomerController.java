@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -72,6 +73,8 @@ public class CustomerController {
     @GetMapping("/customer/create")
     public ModelAndView createCustomer() {
         // this just shows us the create page for the first time when the user goes to the page
+
+        // this is the page primer for create
         ModelAndView response = new ModelAndView();
 
         LOG.debug("DEBUG LEVEL");
@@ -80,6 +83,29 @@ public class CustomerController {
         LOG.error("ERROR LEVEL");
 
         response.setViewName("customer/create");
+
+        return response;
+    }
+
+    @GetMapping("/customer/edit/{customerId}")
+    public ModelAndView editCustomer(@PathVariable Integer customerId) {
+        ModelAndView response = new ModelAndView();
+        // this is the page primer for edit
+        response.setViewName("customer/create");
+
+        Customer customer = customerDao.findById(customerId);
+
+        CreateCustomerFormBean form = new CreateCustomerFormBean();
+
+        form.setCompanyName(customer.getCustomerName());
+        form.setFirstName(customer.getContactFirstname());
+        form.setLastName(customer.getContactLastname());
+        form.setAddressLine1(customer.getAddressLine1());
+        form.setPhone(customer.getPhone());
+        form.setCity(customer.getCity());
+        form.setCountry(customer.getCountry());
+
+        response.addObject("form", form);
 
         return response;
     }
