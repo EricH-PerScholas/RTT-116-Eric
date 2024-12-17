@@ -93,6 +93,8 @@ public class CustomerController {
         // this is the page primer for edit
         response.setViewName("customer/create");
 
+        LOG.debug("============= EDITING CUSTOMER " + customerId);
+
         Customer customer = customerDao.findById(customerId);
 
         CreateCustomerFormBean form = new CreateCustomerFormBean();
@@ -116,7 +118,7 @@ public class CustomerController {
         // this is called when the user clicks the submit button on the form
         ModelAndView response = new ModelAndView();
 
-        response.setViewName("customer/create");
+
 
         // manually do some validations here in the controller
 
@@ -126,6 +128,7 @@ public class CustomerController {
             for (ObjectError error : bindingResult.getAllErrors()) {
                 LOG.debug(error.toString());
             }
+            response.setViewName("customer/create");
             response.addObject("bindingResult", bindingResult);
             response.addObject("form", form);
         } else {
@@ -151,6 +154,12 @@ public class CustomerController {
             customer.setEmployee(employee);
 
             customerDao.save(customer);
+
+            LOG.debug("============= SAVING CUSTOMER " + customer.getId());
+
+            // in either case ... create or edit .. I now want to redirect to the edit url
+            response.setViewName("redirect:/customer/edit/" + customer.getId() );
+
         }
 
         return response;
