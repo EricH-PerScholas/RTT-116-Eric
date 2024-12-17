@@ -5,6 +5,7 @@ import com.example.module309.database.dao.EmployeeDAO;
 import com.example.module309.database.entity.Customer;
 import com.example.module309.database.entity.Employee;
 import com.example.module309.form.CreateCustomerFormBean;
+import jakarta.validation.Valid;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
@@ -12,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -57,7 +60,7 @@ public class CustomerController {
         // add the search field to the model so we can use it on the jsp page
         response.addObject("search", firstName);
 
-        if ( firstName != null ) {
+        if (firstName != null) {
             List<Customer> customers = customerDao.findByFirstName(firstName);
             response.addObject("customersKey", customers);
         }
@@ -82,7 +85,7 @@ public class CustomerController {
     }
 
     @GetMapping("/customer/createCustomer")
-    public ModelAndView createCustomerSubmit(CreateCustomerFormBean form) {
+    public ModelAndView createCustomerSubmit(@Valid CreateCustomerFormBean form, BindingResult bindingResult) {
         // this is called when the user clicks the submit button on the form
         ModelAndView response = new ModelAndView();
 
@@ -90,7 +93,11 @@ public class CustomerController {
 
         LOG.debug(form.toString());
 
-        System.out.println(form);  //forbidden
+        if (bindingResult.hasErrors()) {
+            for (ObjectError error : bindingResult.getAllErrors()) {
+                LOG.debug(error.toString());
+            }
+        }
 
         Customer customer = new Customer();
         customer.setCustomerName(form.getCompanyName());
