@@ -77,6 +77,9 @@ public class CustomerController {
         // this is the page primer for create
         ModelAndView response = new ModelAndView();
 
+        List<Employee> employees = employeeDAO.findAllEmployees();
+        response.addObject("employeesKey", employees);
+
         LOG.debug("DEBUG LEVEL");
         LOG.info("INFO LEVEL");
         LOG.warn("WARNING LEVEL");
@@ -110,6 +113,9 @@ public class CustomerController {
 
         response.addObject("form", form);
 
+        List<Employee> employees = employeeDAO.findAllEmployees();
+        response.addObject("employeesKey", employees);
+
         return response;
     }
 
@@ -117,9 +123,7 @@ public class CustomerController {
     public ModelAndView createCustomerSubmit(@Valid CreateCustomerFormBean form, BindingResult bindingResult) {
         // this is called when the user clicks the submit button on the form
         ModelAndView response = new ModelAndView();
-
-
-
+        
         // manually do some validations here in the controller
 
         LOG.debug(form.toString());
@@ -131,6 +135,9 @@ public class CustomerController {
             response.setViewName("customer/create");
             response.addObject("bindingResult", bindingResult);
             response.addObject("form", form);
+
+            List<Employee> employees = employeeDAO.findAllEmployees();
+            response.addObject("employeesKey", employees);
         } else {
             // when this is a create the id in the form will be null
             // when it is an edit the id in the form will be populated with the PK to edit
@@ -150,7 +157,7 @@ public class CustomerController {
             customer.setCity(form.getCity());
             customer.setCountry(form.getCountry());
 
-            Employee employee = employeeDAO.findById(1056);
+            Employee employee = employeeDAO.findById(form.getEmployeeId());
             customer.setEmployee(employee);
 
             customerDao.save(customer);
