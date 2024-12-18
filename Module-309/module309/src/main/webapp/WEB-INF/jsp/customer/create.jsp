@@ -147,8 +147,12 @@
                 <label for="employeeId" class="col-sm-2 col-form-label">Employee</label>
                 <div class="col-sm-10 col-lg-6">
                     <select name="employeeId" id="employeeId" class="form-control">
+                        <option></option>
                         <c:forEach var="employee" items="${employeesKey}">
-                            <option value="${employee.id}">${employee.firstname} ${employee.lastname}</option>
+                            <option
+                                    value="${employee.id}"
+                                    <c:if test="${form.employeeId eq employee.id}">selected</c:if>
+                                >${employee.firstname} ${employee.lastname}</option>
                         </c:forEach>
                     </select>
                 </div>

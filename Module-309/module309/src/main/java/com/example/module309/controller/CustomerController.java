@@ -110,6 +110,8 @@ public class CustomerController {
         form.setPhone(customer.getPhone());
         form.setCity(customer.getCity());
         form.setCountry(customer.getCountry());
+        form.setEmployeeId(customer.getSalesRepEmployeeId());
+        // alternate form.setEmployeeId(customer.getEmployee().getId());
 
         response.addObject("form", form);
 
@@ -123,7 +125,7 @@ public class CustomerController {
     public ModelAndView createCustomerSubmit(@Valid CreateCustomerFormBean form, BindingResult bindingResult) {
         // this is called when the user clicks the submit button on the form
         ModelAndView response = new ModelAndView();
-        
+
         // manually do some validations here in the controller
 
         LOG.debug(form.toString());
