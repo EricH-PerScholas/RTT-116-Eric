@@ -24,6 +24,7 @@ public class SecurityConfig {
         // this part of the configuration secures acutal URLS
         // this is the list of URLS that require authentication to the website befroe the user can view the URL
         // this works on the idea .. that all URLS are accessable to everyone excpt for the ones listed here
+        // this restriction is NOT including authorization it is only for authentication
         http.authorizeRequests()
                 .requestMatchers(
                         new AntPathRequestMatcher("/customer/**"),
