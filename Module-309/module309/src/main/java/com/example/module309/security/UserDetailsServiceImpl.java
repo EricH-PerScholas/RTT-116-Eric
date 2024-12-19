@@ -32,9 +32,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // first we load the user from the database
-         User user = userDao.findByEmailIgnoreCase(username);
+        User user = userDao.findByEmailIgnoreCase(username);
 
-         // if the user was not found then we get out of here immediately because its a bad login
+        // if the user was not found then we get out of here immediately because its a bad login
         if (user == null) {
             // this is not good practice to log off usernames
             throw new UsernameNotFoundException("Username '" + username + "' not found in database");
@@ -52,13 +52,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         // convert our user roles into spring granted authorities
         List<GrantedAuthority> springRoles = buildGrantAuthorities(userRoles);
 
+        // the person logged into the application is called the principal
         return new org.springframework.security.core.userdetails.User(user.getEmail(),
-                                                                        user.getPassword(),
-                                                                        accountIsEnabled,
-                                                                        accountNonExpired,
-                                                                        credentialsNonExpired,
-                                                                        accountNonLocked,
-                                                                        springRoles);
+                user.getPassword(),
+                accountIsEnabled,
+                accountNonExpired,
+                credentialsNonExpired,
+                accountNonLocked,
+                springRoles);
     }
 
     public List<GrantedAuthority> buildGrantAuthorities(List<UserRole> userRoles) {
