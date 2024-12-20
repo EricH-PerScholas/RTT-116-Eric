@@ -2,6 +2,8 @@ package com.example.module309.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -70,6 +72,10 @@ public class SecurityConfig {
                 // extra security and delete these cookies when logging out
                 .deleteCookies("username", "JSESSIONID"));
 
+        // only if the user goes to a page that they do not have authoziation for then it goes to this page
+        // instead of showing a whitelabel error page
+        http.exceptionHandling(exception -> exception
+                .accessDeniedPage("/404"));
 
         return http.build();
     }
@@ -77,5 +83,10 @@ public class SecurityConfig {
     @Bean(name = "passwordEncoder")
     public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
     }
 }
