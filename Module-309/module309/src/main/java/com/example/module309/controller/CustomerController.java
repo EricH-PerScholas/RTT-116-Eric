@@ -175,6 +175,11 @@ public class CustomerController {
             Employee employee = employeeDAO.findById(form.getEmployeeId());
             customer.setEmployee(employee);
 
+            User loggedInUser = authenticatedUserService.loadCurrentUser();
+            LOG.debug("!!!!!!!!!!!!!!!!!!!!!!!!!! " + loggedInUser.toString());
+            // we cant do this here because the customer does not have a user id on the table
+            //customer.setUser(loggedInUser);
+
             customerDao.save(customer);
 
             LOG.debug("============= SAVING CUSTOMER " + customer.getId());
