@@ -43,6 +43,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/login/login">Login</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login/signup">Signup</a>
+                        </li>
                     </sec:authorize>
                     <sec:authorize access="isAuthenticated()">
                         <li class="nav-item">
