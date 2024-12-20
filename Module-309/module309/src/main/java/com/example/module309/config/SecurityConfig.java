@@ -13,23 +13,38 @@ public class SecurityConfig {
 
     // authentication - the act of checking the users credentials .. meaning is the username and password correct
     // authorization - is what the user can do
+    // principal - this is the user logged in
 
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         // you guys can research this if you want .. its for preventing automated bots and helps to increase the likelyhood that its a human using your site
+        // this is defaulted to on ... so we need to turn it off to prevent hair loss
         http.csrf(csrf -> csrf.disable());
+
+
+        // 1) All URLS are considered open and we restrict the URLS we want to protect
+        // 2) All URLS are restricted and we open the ones we want.
 
         // this part of the configuration secures acutal URLS
         // this is the list of URLS that require authentication to the website befroe the user can view the URL
         // this works on the idea .. that all URLS are accessable to everyone excpt for the ones listed here
         // this restriction is NOT including authorization it is only for authentication
-        http.authorizeRequests()
-                .requestMatchers(
-                        new AntPathRequestMatcher("/customer/**"),
-                        new AntPathRequestMatcher("/employee/**")).authenticated()
-                .anyRequest().permitAll();
+//        http.authorizeRequests()
+//                .requestMatchers(
+//                        new AntPathRequestMatcher("/customer/**"),
+//                        new AntPathRequestMatcher("/employee/**")).authenticated()
+//                .anyRequest().permitAll();
+
+        http.authorizeHttpRequests((authorize) -> authorize
+                        // Require authentication for /customer/** endpoints
+                        .requestMatchers("/customer/**").authenticated()
+                        .requestMatchers("/employee/**").authenticated()
+
+                        // Allow all other requests without authentication
+                        .anyRequest().permitAll()
+                );
 
         // this section specifies where our login page is
         http.formLogin(formLogin -> formLogin

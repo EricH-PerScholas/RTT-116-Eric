@@ -13,6 +13,15 @@
 
 <section class="bg-light2 pt-5 pb-5">
     <div class="container">
+        <!-- this will show an error message when the user fails to login -->
+        <c:if test="${param.error eq ''}">
+            <div class="row justify-content-center">
+                <div class="col-6 alert alert-danger" role="alert">
+                    Invalid username or password
+                </div>
+            </div>
+        </c:if>
+
         <!-- this form has to submit to the .loginProcessingUrl we configured in the spring security config -->
         <!-- and it must be a method=post -->
         <!-- name of the input field MUST BE username -->

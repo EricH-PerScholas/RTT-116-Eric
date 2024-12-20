@@ -48,6 +48,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/login/logout">Logout</a>
                         </li>
+                        <li class="nav-item">
+                            <span class="nav-link">
+                                <sec:authentication property="principal.username"/>
+                            </span>
+                        </li>
                     </sec:authorize>
                     <sec:authorize access="hasAnyAuthority('ADMIN')">
                         <li class="nav-item">
