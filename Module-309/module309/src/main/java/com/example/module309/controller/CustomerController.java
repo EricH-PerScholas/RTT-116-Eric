@@ -38,6 +38,9 @@ import java.util.List;
 // log4j was the most commonly used logging library for a long time and you will probably encounter it
 //@Slf4j  <-  this is from lombok and all it does is line 40
 @Controller
+// by putting the @PreAuthorize on the top of the controller it secures all methods in the controller
+// this annotation can also be used at the method level in a controller
+@PreAuthorize("hasAuthority('CUSTOMER')")
 public class CustomerController {
 
     // this is the old style logging before lombok and there is a very good chance you will see this in code somewhere
@@ -52,7 +55,6 @@ public class CustomerController {
     private EmployeeDAO employeeDAO;
 
 
-    @PreAuthorize("hasAuthority('USER')")
     @GetMapping("/customer/search")
     public ModelAndView search(@RequestParam(required = false) String firstName) {
         ModelAndView response = new ModelAndView();

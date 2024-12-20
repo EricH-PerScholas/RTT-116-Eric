@@ -53,14 +53,13 @@ public class LoginController {
     public ModelAndView signupSubmit(@Valid SignupFormBean form, BindingResult bindingResult) {
         ModelAndView response = new ModelAndView();
 
-
-
         // could manually check the email from the database and ADD an error to the binding
 
         if ( bindingResult.hasErrors() ) {
             response.setViewName("login/signup");
             response.addObject("bindingResult", bindingResult);
             response.addObject("form", form);
+
         } else {
             User user = new User();
 

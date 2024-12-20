@@ -33,12 +33,14 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/index">Index</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/customer/search">Customer Search</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/customer/create">Create Customer</a>
-                    </li>
+                    <sec:authorize access="hasAuthority('CUSTOMER')">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/customer/search">Customer Search</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/customer/create">Create Customer</a>
+                        </li>
+                    </sec:authorize>
                     <sec:authorize access="!isAuthenticated()">
                         <li class="nav-item">
                             <a class="nav-link" href="/login/login">Login</a>
