@@ -18,7 +18,7 @@
 
 <section class="bg-light2 pt-5 pb-5">
     <div class="container">
-        <form action="/customer/createCustomer">
+        <form action="/customer/createCustomer" method="POST">
             <input type="hidden" name="id" value="${form.id}"/>
 
             <div class="mt-3 row justify-content-center">

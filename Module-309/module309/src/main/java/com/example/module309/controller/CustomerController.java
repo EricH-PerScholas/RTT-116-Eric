@@ -18,9 +18,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -63,6 +61,8 @@ public class CustomerController {
     @GetMapping("/customer/search")
     public ModelAndView search(@RequestParam(required = false) String firstName) {
         ModelAndView response = new ModelAndView();
+
+        int x = 10 / 0;
 
         // /WEB-INF/jsp/customer/search.jsp
         response.setViewName("customer/search");
@@ -134,7 +134,7 @@ public class CustomerController {
         return response;
     }
 
-    @GetMapping("/customer/createCustomer")
+    @PostMapping("/customer/createCustomer")
     public ModelAndView createCustomerSubmit(@Valid CreateCustomerFormBean form, BindingResult bindingResult) {
         // this is called when the user clicks the submit button on the form
         ModelAndView response = new ModelAndView();
@@ -185,7 +185,9 @@ public class CustomerController {
             LOG.debug("============= SAVING CUSTOMER " + customer.getId());
 
             // in either case ... create or edit .. I now want to redirect to the edit url
-            response.setViewName("redirect:/customer/edit/" + customer.getId() );
+            //response.setViewName("redirect:/customer/edit/" + customer.getId() );
+
+            response.setViewName("customer/create");
 
         }
 
