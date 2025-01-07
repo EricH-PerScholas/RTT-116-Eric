@@ -21,6 +21,10 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 
@@ -40,7 +44,7 @@ import java.util.List;
 @Controller
 // by putting the @PreAuthorize on the top of the controller it secures all methods in the controller
 // this annotation can also be used at the method level in a controller
-@PreAuthorize("hasAnyAuthority('CUSTOMER')")
+@PreAuthorize("hasAuthority('CUSTOMER')")
 public class CustomerController {
 
     // this is the old style logging before lombok and there is a very good chance you will see this in code somewhere
@@ -62,7 +66,7 @@ public class CustomerController {
     public ModelAndView search(@RequestParam(required = false) String firstName) {
         ModelAndView response = new ModelAndView();
 
-        int x = 10 / 0;
+        //int x = 10 / 0;
 
         // /WEB-INF/jsp/customer/search.jsp
         response.setViewName("customer/search");
@@ -135,7 +139,7 @@ public class CustomerController {
     }
 
     @PostMapping("/customer/createCustomer")
-    public ModelAndView createCustomerSubmit(@Valid CreateCustomerFormBean form, BindingResult bindingResult) {
+    public ModelAndView createCustomerSubmit(@Valid CreateCustomerFormBean form, BindingResult bindingResult) throws Exception {
         // this is called when the user clicks the submit button on the form
         ModelAndView response = new ModelAndView();
 
@@ -171,6 +175,20 @@ public class CustomerController {
             customer.setAddressLine1(form.getAddressLine1());
             customer.setCity(form.getCity());
             customer.setCountry(form.getCountry());
+
+            // here we are going to deal with saving the upload file to the disk
+            LOG.debug("uploaded filename = " + form.getUpload().getOriginalFilename() + " size = " + form.getUpload().getSize());
+            // create a new file object that represents the location to save the upload to
+            // we know that intellij always assumes the current working directory is the root of the project so we are making
+            // a relative URL To the images folder within our project
+            String pathToSave = "./src/main/webapp/pub/images/" + form.getUpload().getOriginalFilename()  ;
+            // this is a java utility that will read the file from the upload and write it to the file we created above
+            // will not take the entire file into memory
+            Files.copy(form.getUpload().getInputStream(),  Paths.get(pathToSave), StandardCopyOption.REPLACE_EXISTING);
+            // this is the url that we will use to display the image in the browser
+            // it is an absolute URL based on the webapp folder as it would be used in the html
+            String url = "/pub/images/" + form.getUpload().getOriginalFilename();
+            customer.setImageUrl(url);
 
             Employee employee = employeeDAO.findById(form.getEmployeeId());
             customer.setEmployee(employee);

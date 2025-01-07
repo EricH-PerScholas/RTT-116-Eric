@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -52,6 +53,9 @@ public class CreateCustomerFormBean {
     @Length(max = 50, message = "Country must be less than 50 characters.")
     @NotEmpty(message = "Country name is required.")
     private String country;
+
+
+    private MultipartFile upload;
 
 
     private Integer employeeId;
