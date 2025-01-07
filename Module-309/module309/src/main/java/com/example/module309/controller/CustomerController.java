@@ -138,6 +138,8 @@ public class CustomerController {
         return response;
     }
 
+    // these 2 are the same thing just expressed 2 differnt ways and @PostMapping is a shortcut
+    //@RequestMapping(value = "/customer/createCustomer", method = RequestMethod.POST)
     @PostMapping("/customer/createCustomer")
     public ModelAndView createCustomerSubmit(@Valid CreateCustomerFormBean form, BindingResult bindingResult) throws Exception {
         // this is called when the user clicks the submit button on the form
