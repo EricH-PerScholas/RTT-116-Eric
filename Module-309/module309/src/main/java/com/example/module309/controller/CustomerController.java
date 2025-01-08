@@ -7,6 +7,8 @@ import com.example.module309.database.entity.Employee;
 import com.example.module309.database.entity.User;
 import com.example.module309.form.CreateCustomerFormBean;
 import com.example.module309.security.AuthenticatedUserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import jakarta.validation.Valid;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
@@ -60,6 +62,23 @@ public class CustomerController {
 
     @Autowired
     private AuthenticatedUserService authenticatedUserService;
+
+
+    @GetMapping("/customer/ajaxExample")
+    public ModelAndView ajaxExample() {
+        ModelAndView response = new ModelAndView();
+        response.setViewName("customer/ajaxExample");
+        return response;
+    }
+
+    @ResponseBody
+    @GetMapping("/customer/ajaxCall")
+    public String ajaxCall(@RequestParam Integer customerId) throws Exception {
+        Customer customer = customerDao.findById(customerId);
+
+        String json = new ObjectMapper().writeValueAsString(customer);
+        return json;
+    }
 
 
     @GetMapping("/customer/search")
@@ -166,7 +185,7 @@ public class CustomerController {
             // if its not found in the database its a create
             // if it is found in the database then its an edit
             Customer customer = customerDao.findById(form.getId());
-            if ( customer == null ) {
+            if (customer == null) {
                 customer = new Customer();
             }
 
@@ -183,10 +202,10 @@ public class CustomerController {
             // create a new file object that represents the location to save the upload to
             // we know that intellij always assumes the current working directory is the root of the project so we are making
             // a relative URL To the images folder within our project
-            String pathToSave = "./src/main/webapp/pub/images/" + form.getUpload().getOriginalFilename()  ;
+            String pathToSave = "./src/main/webapp/pub/images/" + form.getUpload().getOriginalFilename();
             // this is a java utility that will read the file from the upload and write it to the file we created above
             // will not take the entire file into memory
-            Files.copy(form.getUpload().getInputStream(),  Paths.get(pathToSave), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(form.getUpload().getInputStream(), Paths.get(pathToSave), StandardCopyOption.REPLACE_EXISTING);
             // this is the url that we will use to display the image in the browser
             // it is an absolute URL based on the webapp folder as it would be used in the html
             String url = "/pub/images/" + form.getUpload().getOriginalFilename();
