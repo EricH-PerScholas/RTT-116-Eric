@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import jakarta.validation.Valid;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -165,6 +166,10 @@ public class CustomerController {
         ModelAndView response = new ModelAndView();
 
         // manually do some validations here in the controller
+        if ( form.getCountry().startsWith("X") ) {
+            // we are not allowing countries that start with X anymore
+            bindingResult.rejectValue("country", "does not matter", "Country must not begin with X");
+        }
 
         LOG.debug(form.toString());
 
